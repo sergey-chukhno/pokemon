@@ -1,5 +1,7 @@
 import pygame
 import random
+import os
+import math
 from typing import Dict, Optional
 from models.pokemon import Pokemon
 from data_manager.file_handler import FileHandler
@@ -31,6 +33,22 @@ class BattleSystem:
         # Load battle background
         self.background = pygame.Surface(screen.get_size())
         self.background.fill(self.WHITE)
+        
+        # Add new attributes for battle scene
+        self.battle_backgrounds = self.load_battle_backgrounds()
+        self.current_background = None
+        self.animation_frame = 0
+        self.animation_speed = 0.2
+        self.particle_effects = []
+        
+        # Health bar colors and properties
+        self.HP_COLORS = {
+            'high': (76, 175, 80),     # Green
+            'medium': (255, 152, 0),    # Orange
+            'low': (244, 67, 54)        # Red
+        }
+        self.HP_BAR_HEIGHT = 15
+        self.HP_BAR_BORDER = 2
 
     def start(self, player_data: Dict) -> Dict:
         # Initialize battle
@@ -185,54 +203,122 @@ class BattleSystem:
         self.show_message("Defeat! Better luck next time!")
 
     def draw_battle(self):
-        """Draw the battle screen"""
-        self.screen.fill(self.WHITE)
+        """Draw enhanced battle scene"""
+        # Select and draw background based on Pokemon types
+        bg_type = self.select_background_type()
+        self.screen.blit(self.battle_backgrounds.get(bg_type, self.background), (0, 0))
         
-        # Draw Pokemon sprites
-        # Player Pokemon (bottom left)
-        player_sprite_rect = self.player_pokemon.sprite.get_rect(center=(200, 400))
-        self.screen.blit(self.player_pokemon.sprite, player_sprite_rect)
+        # Draw battle platforms
+        self.draw_battle_platforms()
         
-        # Enemy Pokemon (top right)
-        enemy_sprite_rect = self.enemy_pokemon.sprite.get_rect(center=(600, 200))
-        self.screen.blit(self.enemy_pokemon.sprite, enemy_sprite_rect)
+        # Draw Pokemon with animations
+        self.draw_animated_pokemon()
         
-        # Draw Pokemon info
-        self.draw_pokemon_info(self.player_pokemon, (50, 450))
-        self.draw_pokemon_info(self.enemy_pokemon, (450, 50))
+        # Draw modern health bars
+        self.draw_modern_health_bar(self.player_pokemon, (50, 450), is_player=True)
+        self.draw_modern_health_bar(self.enemy_pokemon, (450, 50), is_player=False)
         
-        # Draw battle log
-        log_y = 500
-        for message in self.battle_log[-3:]:  # Show last 3 messages
-            self.draw_text(message, (400, log_y), self.info_font, center=True)
-            log_y += 30
+        # Draw particle effects
+        self.update_and_draw_particles()
         
-        # Draw turn indicator
-        if self.turn_state == "player_turn":
-            self.draw_text("Your turn! (1-4 to attack)", (400, 30), self.battle_font, center=True)
-        else:
-            self.draw_text("Enemy turn! (Press Enter)", (400, 30), self.battle_font, center=True)
+        # Draw battle log with fade effect
+        self.draw_battle_log_with_fade()
 
-    def draw_pokemon_info(self, pokemon: Pokemon, position: tuple):
-        """Draw Pokemon information"""
+    def draw_battle_platforms(self):
+        """Draw elevated platforms for Pokemon"""
+        # Player platform
+        player_platform = pygame.Surface((200, 50))
+        player_platform.set_alpha(128)
+        platform_gradient(player_platform, (60, 60, 60), (40, 40, 40))
+        self.screen.blit(player_platform, (150, 450))
+        
+        # Enemy platform
+        enemy_platform = pygame.Surface((200, 50))
+        enemy_platform.set_alpha(128)
+        platform_gradient(enemy_platform, (60, 60, 60), (40, 40, 40))
+        self.screen.blit(enemy_platform, (550, 250))
+
+    def draw_modern_health_bar(self, pokemon: Pokemon, position: tuple, is_player: bool):
+        """Draw a modern-looking health bar"""
         x, y = position
+        max_hp = pokemon.stats["hp"]
+        current_hp = pokemon.current_hp
+        hp_percentage = current_hp / max_hp
         
-        # Draw name and level
-        self.draw_text(f"{pokemon.name.capitalize()} Lv.{pokemon.level}", 
-                      (x, y), self.battle_font)
+        # Determine health bar color
+        if hp_percentage > 0.5:
+            color = self.HP_COLORS['high']
+        elif hp_percentage > 0.25:
+            color = self.HP_COLORS['medium']
+        else:
+            color = self.HP_COLORS['low']
         
-        # Draw HP bar
-        hp_percent = pokemon.current_hp / pokemon.stats["hp"]
-        bar_width = 200
-        bar_height = 20
-        pygame.draw.rect(self.screen, self.RED, 
-                        (x, y + 30, bar_width, bar_height))
-        pygame.draw.rect(self.screen, self.GREEN,
-                        (x, y + 30, bar_width * hp_percent, bar_height))
+        # Draw name plate
+        name_plate = pygame.Surface((250, 80))
+        name_plate.set_alpha(200)
+        name_plate.fill((40, 40, 40))
+        self.screen.blit(name_plate, (x - 10, y - 10))
+        
+        # Draw Pokemon name and level
+        self.draw_text(f"{pokemon.name.capitalize()} Lv.{pokemon.level}",
+                      (x, y), self.battle_font, self.WHITE)
+        
+        # Draw HP bar background
+        bar_bg = pygame.Rect(x, y + 30, 200, self.HP_BAR_HEIGHT)
+        pygame.draw.rect(self.screen, (40, 40, 40), bar_bg)
+        
+        # Draw HP bar with smooth animation
+        bar_width = int(200 * hp_percentage)
+        bar_rect = pygame.Rect(x, y + 30, bar_width, self.HP_BAR_HEIGHT)
+        pygame.draw.rect(self.screen, color, bar_rect)
+        
+        # Draw border
+        pygame.draw.rect(self.screen, self.WHITE, bar_bg, self.HP_BAR_BORDER)
         
         # Draw HP numbers
-        self.draw_text(f"HP: {pokemon.current_hp}/{pokemon.stats['hp']}", 
-                      (x, y + 60), self.info_font)
+        hp_text = f"{current_hp}/{max_hp}"
+        self.draw_text(hp_text, (x + 210, y + 30), 
+                      self.info_font, self.WHITE)
+
+    def draw_animated_pokemon(self):
+        """Draw Pokemon with idle animations"""
+        self.animation_frame += self.animation_speed
+        
+        # Player Pokemon animation
+        player_y_offset = math.sin(self.animation_frame) * 5
+        player_pos = (200, 400 + player_y_offset)
+        self.screen.blit(self.player_pokemon.sprite, player_pos)
+        
+        # Enemy Pokemon animation
+        enemy_y_offset = math.sin(self.animation_frame + math.pi) * 5
+        enemy_pos = (600, 200 + enemy_y_offset)
+        self.screen.blit(self.enemy_pokemon.sprite, enemy_pos)
+
+    def add_attack_particles(self, attacker_pos: tuple, target_pos: tuple):
+        """Add particle effects for attacks"""
+        # Add various particle effects based on attack type
+        pass
+
+    def update_and_draw_particles(self):
+        """Update and draw particle effects"""
+        # Update particle positions and draw them
+        pass
+
+    def draw_battle_log_with_fade(self):
+        """Draw battle log with fade effect"""
+        log_surface = pygame.Surface((600, 100))
+        log_surface.set_alpha(200)
+        log_surface.fill((40, 40, 40))
+        
+        y = 10
+        for i, message in enumerate(self.battle_log[-3:]):
+            alpha = 255 - (i * 50)  # Fade out older messages
+            text_surface = self.info_font.render(message, True, self.WHITE)
+            text_surface.set_alpha(alpha)
+            log_surface.blit(text_surface, (10, y))
+            y += 30
+            
+        self.screen.blit(log_surface, (100, 500))
 
     def draw_text(self, text: str, position: tuple, font: pygame.font.Font, 
                  color: tuple = None, center: bool = False):
@@ -270,4 +356,62 @@ class BattleSystem:
             self.screen.fill(self.BLUE)
             self.draw_text("Evolving...", (400, 300), self.title_font, center=True)
             pygame.display.flip()
-            pygame.time.wait(200) 
+            pygame.time.wait(200)
+
+    def load_battle_backgrounds(self):
+        """Load different battle backgrounds for variety"""
+        backgrounds = {}
+        background_types = ['grass', 'water', 'cave', 'gym']
+        
+        for bg_type in background_types:
+            try:
+                path = os.path.join('images', 'battles', f'{bg_type}.png')
+                bg = pygame.image.load(path)
+                backgrounds[bg_type] = pygame.transform.scale(bg, self.screen.get_size())
+            except Exception as e:
+                print(f"Error loading {bg_type} background: {e}")
+                
+        return backgrounds
+
+    def select_background_type(self) -> str:
+        """Select appropriate background type based on Pokemon types"""
+        # Get types from both Pokemon
+        enemy_type = self.enemy_pokemon.types[0].lower()
+        player_type = self.player_pokemon.types[0].lower()
+        
+        # Map Pokemon types to background types
+        type_to_background = {
+            'grass': 'grass',
+            'water': 'water',
+            'ground': 'cave',
+            'rock': 'cave',
+            'fighting': 'gym',
+            'normal': 'gym'
+        }
+        
+        # Try to select background based on enemy Pokemon's type first
+        bg_type = type_to_background.get(enemy_type)
+        if bg_type:
+            return bg_type
+        
+        # If no match, try player Pokemon's type
+        bg_type = type_to_background.get(player_type)
+        if bg_type:
+            return bg_type
+        
+        # Default to gym background if no matching type
+        return 'gym'
+
+def platform_gradient(surface: pygame.Surface, color1: tuple, color2: tuple):
+    """Create a gradient effect on a surface from color1 to color2"""
+    height = surface.get_height()
+    for y in range(height):
+        # Calculate color for this line
+        factor = y / height
+        current_color = [
+            int(color1[i] + (color2[i] - color1[i]) * factor)
+            for i in range(3)
+        ]
+        # Draw horizontal line
+        pygame.draw.line(surface, current_color, 
+                        (0, y), (surface.get_width(), y))
