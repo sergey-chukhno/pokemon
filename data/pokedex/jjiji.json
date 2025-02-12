@@ -1,0 +1,39 @@
+{
+    "name": "jjiji",
+    "pokemons": [
+        {
+            "id": 4,
+            "name": "charmander",
+            "types": [
+                "fire"
+            ],
+            "stats": {
+                "hp": 39,
+                "attack": 52,
+                "defense": 43,
+                "special-attack": 60,
+                "special-defense": 50,
+                "speed": 65
+            },
+            "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",
+            "evolution_chain": {
+                "stages": [
+                    {
+                        "name": "charmander",
+                        "min_level": 1
+                    },
+                    {
+                        "name": "charmeleon",
+                        "min_level": 17
+                    },
+                    {
+                        "name": "charizard",
+                        "min_level": 33
+                    }
+                ]
+            },
+            "level": 1,
+            "experience": 0
+        }
+    ]
+}

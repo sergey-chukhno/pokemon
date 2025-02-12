@@ -208,35 +208,18 @@ class BattleSystem:
         bg_type = self.select_background_type()
         self.screen.blit(self.battle_backgrounds.get(bg_type, self.background), (0, 0))
         
-        # Draw battle platforms
-        self.draw_battle_platforms()
-        
         # Draw Pokemon with animations
         self.draw_animated_pokemon()
         
-        # Draw modern health bars
-        self.draw_modern_health_bar(self.player_pokemon, (50, 450), is_player=True)
-        self.draw_modern_health_bar(self.enemy_pokemon, (450, 50), is_player=False)
+        # Draw modern health bars with adjusted positions
+        self.draw_modern_health_bar(self.enemy_pokemon, (450, 100), is_player=False)
+        self.draw_modern_health_bar(self.player_pokemon, (50, 250), is_player=True)
         
         # Draw particle effects
         self.update_and_draw_particles()
         
         # Draw battle log with fade effect
         self.draw_battle_log_with_fade()
-
-    def draw_battle_platforms(self):
-        """Draw elevated platforms for Pokemon"""
-        # Player platform
-        player_platform = pygame.Surface((200, 50))
-        player_platform.set_alpha(128)
-        platform_gradient(player_platform, (60, 60, 60), (40, 40, 40))
-        self.screen.blit(player_platform, (150, 450))
-        
-        # Enemy platform
-        enemy_platform = pygame.Surface((200, 50))
-        enemy_platform.set_alpha(128)
-        platform_gradient(enemy_platform, (60, 60, 60), (40, 40, 40))
-        self.screen.blit(enemy_platform, (550, 250))
 
     def draw_modern_health_bar(self, pokemon: Pokemon, position: tuple, is_player: bool):
         """Draw a modern-looking health bar"""
@@ -253,44 +236,51 @@ class BattleSystem:
         else:
             color = self.HP_COLORS['low']
         
-        # Draw name plate
-        name_plate = pygame.Surface((250, 80))
+        # Draw name plate with increased width (+20 pixels total)
+        name_plate = pygame.Surface((270, 80))  # Increased from 260 to 270
         name_plate.set_alpha(200)
         name_plate.fill((40, 40, 40))
         self.screen.blit(name_plate, (x - 10, y - 10))
         
-        # Draw Pokemon name and level
+        # Use slightly smaller font for Pokemon name and level
+        name_font = pygame.font.Font(None, 32)  # Reduced from 36
         self.draw_text(f"{pokemon.name.capitalize()} Lv.{pokemon.level}",
-                      (x, y), self.battle_font, self.WHITE)
+                      (x, y), name_font, self.WHITE)
         
-        # Draw HP bar background
-        bar_bg = pygame.Rect(x, y + 30, 200, self.HP_BAR_HEIGHT)
+        # Draw HP bar background with increased width (+20 pixels total)
+        bar_bg = pygame.Rect(x, y + 30, 220, self.HP_BAR_HEIGHT)  # Increased from 210 to 220
         pygame.draw.rect(self.screen, (40, 40, 40), bar_bg)
         
-        # Draw HP bar with smooth animation
-        bar_width = int(200 * hp_percentage)
+        # Draw HP bar with smooth animation and increased width
+        bar_width = int(220 * hp_percentage)  # Increased from 210 to 220
         bar_rect = pygame.Rect(x, y + 30, bar_width, self.HP_BAR_HEIGHT)
         pygame.draw.rect(self.screen, color, bar_rect)
         
         # Draw border
         pygame.draw.rect(self.screen, self.WHITE, bar_bg, self.HP_BAR_BORDER)
         
-        # Draw HP numbers
+        # Draw HP numbers with smaller font
+        hp_font = pygame.font.Font(None, 20)  # Reduced from 24
         hp_text = f"{current_hp}/{max_hp}"
-        self.draw_text(hp_text, (x + 210, y + 30), 
-                      self.info_font, self.WHITE)
+        self.draw_text(hp_text, (x + 230, y + 30),  # Increased from 220 to 230
+                      hp_font, self.WHITE)
 
     def draw_animated_pokemon(self):
         """Draw Pokemon with idle animations"""
-        self.animation_frame += self.animation_speed
+        # Reduce animation speed (from 0.2 to 0.05)
+        self.animation_frame += 0.05
         
-        # Player Pokemon animation
-        player_y_offset = math.sin(self.animation_frame) * 5
-        player_pos = (200, 400 + player_y_offset)
-        self.screen.blit(self.player_pokemon.sprite, player_pos)
+        # Reduce amplitude (from 5 to 3) and slow down sine wave
+        player_y_offset = math.sin(self.animation_frame * 0.5) * 3
+        # Move player Pokemon up 50 pixels (from y=400 to y=350)
+        player_pos = (200, 350 + player_y_offset)
         
-        # Enemy Pokemon animation
-        enemy_y_offset = math.sin(self.animation_frame + math.pi) * 5
+        # Flip player Pokemon sprite horizontally
+        flipped_sprite = pygame.transform.flip(self.player_pokemon.sprite, True, False)
+        self.screen.blit(flipped_sprite, player_pos)
+        
+        # Enemy Pokemon animation (unchanged)
+        enemy_y_offset = math.sin((self.animation_frame * 0.5) + math.pi) * 3
         enemy_pos = (600, 200 + enemy_y_offset)
         self.screen.blit(self.enemy_pokemon.sprite, enemy_pos)
 
