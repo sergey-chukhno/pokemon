@@ -1,8 +1,23 @@
 import pygame
 import requests
 from io import BytesIO
-from typing import Dict, List
+from typing import Dict, List, Optional
 from .evolution import EvolutionChain
+
+class Move:
+    def __init__(self, name: str, move_type: str, category: str, power: int, accuracy: int, pp: int):
+        self.name = name
+        self.type = move_type
+        self.category = category  # 'physical', 'special', or 'status'
+        self.power = power
+        self.accuracy = accuracy
+        self.pp = pp
+        self.current_pp = pp
+        
+        # Status move effects
+        self.status_effect = None  # 'paralysis', 'burn', 'freeze', 'sleep', 'poison'
+        self.stat_changes = {}     # {'attack': 1, 'defense': -1} etc.
+        self.effect_chance = 0     # Chance to apply status/stat changes
 
 class Pokemon:
     def __init__(self, 
@@ -24,6 +39,18 @@ class Pokemon:
         self.experience = experience
         self.current_hp = stats["hp"]
         self.sprite = self.load_sprite()
+        
+        
+        self.moves = self.get_default_moves()
+        
+        
+        self.stat_stages = {
+            'attack': 0, 'defense': 0, 
+            'special-attack': 0, 'special-defense': 0,
+            'speed': 0, 'accuracy': 0, 'evasion': 0
+        }
+        self.status_condition = None
+        self.toxic_counter = 0
 
     def load_sprite(self) -> pygame.Surface:
         """Load Pokemon sprite from URL"""
@@ -98,19 +125,40 @@ class Pokemon:
             exp_needed = self.experience_to_next_level()
 
     def experience_to_next_level(self) -> int:
-        """Calculate experience needed for next level"""
-        # Simple formula: each level requires more experience
         return self.level * 100
 
     def level_up(self):
-        """Increase Pokemon level and update stats"""
         self.level += 1
         
         # Increase stats by 10%
         for stat in self.stats:
             self.stats[stat] = int(self.stats[stat] * 1.1)
         
-        # Update current HP to match new max HP
         self.current_hp = self.stats["hp"]
 
-    # ... (rest of the Pokemon class remains the same) 
+    def get_default_moves(self) -> List[Move]:
+        moves = []
+        # Tackle is the move used by default
+        moves.append(Move('Tackle', 'normal', 'physical', 40, 100, 35))
+        
+        # Add type-specific move
+        type_moves = {
+            'fire': Move('Ember', 'fire', 'special', 40, 100, 25),
+            'water': Move('Water Gun', 'water', 'special', 40, 100, 25),
+            'grass': Move('Vine Whip', 'grass', 'physical', 45, 100, 25),
+            'electric': Move('Thunder Shock', 'electric', 'special', 40, 100, 30),
+            'normal': Move('Scratch', 'normal', 'physical', 40, 100, 35)
+        }
+        
+        # Add a move based on the Pokemon's primary type
+        primary_type = self.types[0].lower()
+        if primary_type in type_moves:
+            moves.append(type_moves[primary_type])
+        
+        # Fill remaining slots with Tackle if needed
+        while len(moves) < 4:
+            moves.append(Move('Tackle', 'normal', 'physical', 40, 100, 35))
+        
+        return moves
+
+    

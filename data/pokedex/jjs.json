@@ -1,21 +1,21 @@
 {
-    "name": "jjii",
+    "name": "jjs",
     "pokemons": [
         {
-            "id": 7,
-            "name": "squirtle",
+            "id": 8,
+            "name": "wartortle",
             "types": [
                 "water"
             ],
             "stats": {
-                "hp": 44,
-                "attack": 48,
-                "defense": 65,
-                "special-attack": 50,
-                "special-defense": 64,
-                "speed": 43
+                "hp": 59,
+                "attack": 63,
+                "defense": 80,
+                "special-attack": 65,
+                "special-defense": 80,
+                "speed": 58
             },
-            "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png",
+            "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/8.png",
             "evolution_chain": {
                 "stages": [
                     {

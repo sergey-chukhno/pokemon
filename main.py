@@ -24,7 +24,7 @@ class PokemonGame:
         self.menu = MenuSystem(self.screen, self.pokemons)
         self.battle = BattleSystem(self.screen, self.pokemons)
         
-        # Game state
+    
         self.current_player = None
         self.running = True
 
@@ -37,9 +37,7 @@ class PokemonGame:
             elif result["action"] == "quit":
                 self.running = False
             elif result["action"] == "battle":
-                # Start battle with the player data
                 battle_result = self.battle.start(result["player_data"])
-                # Handle battle result if needed
                 if battle_result and battle_result["action"] == "quit":
                     self.running = False
 
