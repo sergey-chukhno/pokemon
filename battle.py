@@ -149,6 +149,11 @@ class BattleSystem:
             self.apply_status_effect(self.enemy_pokemon, move.status_effect)
         
         self.update_status_effects(self.player_pokemon)
+        
+        # Add attack animation
+        attacker_pos = (200, 350)  # Player Pokemon position
+        target_pos = (600, 200)    # Enemy Pokemon position
+        self.add_attack_particles(attacker_pos, target_pos, move)
 
     def calculate_damage(self, attacker: Pokemon, defender: Pokemon, move: Move) -> int:
         # Calculate damage using Pokemon game formula
@@ -214,6 +219,11 @@ class BattleSystem:
         
         # Update status effects at end of turn
         self.update_status_effects(self.enemy_pokemon)
+        
+        # Add attack animation
+        attacker_pos = (600, 200)  # Enemy Pokemon position
+        target_pos = (200, 350)    # Player Pokemon position
+        self.add_attack_particles(attacker_pos, target_pos, move)
 
     def calculate_type_effectiveness(self, attack_type: str, defender_types: list) -> float:
         """Calculate type effectiveness multiplier"""
@@ -350,11 +360,224 @@ class BattleSystem:
         enemy_pos = (600, 200 + enemy_y_offset)
         self.screen.blit(self.enemy_pokemon.sprite, enemy_pos)
 
-    def add_attack_particles(self, attacker_pos: tuple, target_pos: tuple):
-        pass
+    def add_attack_particles(self, attacker_pos: tuple, target_pos: tuple, move: Move):
+        """Add particles for attack animation with enhanced elemental effects"""
+        if not self.animation_state:
+            # Calculate direction vector
+            dx = target_pos[0] - attacker_pos[0]
+            dy = target_pos[1] - attacker_pos[1]
+            distance = math.sqrt(dx*dx + dy*dy)
+            dir_x = dx/distance if distance > 0 else 0
+            dir_y = dy/distance if distance > 0 else 0
+            
+            self.animation_state = {
+                'type': 'attack',
+                'particles': [],
+                'timer': 0,
+                'move': move,
+                'source': 'player' if attacker_pos[0] < target_pos[0] else 'enemy',
+                'start_pos': attacker_pos,
+                'end_pos': target_pos,
+                'direction': (dir_x, dir_y)
+            }
+            
+            num_particles = 40  # Increased for more visual impact
+            
+            if move.type == 'fire':
+                # Create flame trail effect
+                for _ in range(num_particles):
+                    angle = random.uniform(0, 2 * math.pi)
+                    speed = random.uniform(6, 12)
+                    particle = {
+                        'pos': list(attacker_pos),
+                        'vel': [speed * math.cos(angle), speed * math.sin(angle)],
+                        'life': 1.0,
+                        'size': random.uniform(6, 14),
+                        'color': (255, random.randint(50, 150), 0),
+                        'type': 'flame',
+                        'angle': random.uniform(0, 360)
+                    }
+                    self.animation_state['particles'].append(particle)
+                    
+            elif move.type == 'water':
+                # Create water droplet effect
+                for _ in range(num_particles):
+                    particle = {
+                        'pos': list(attacker_pos),
+                        'vel': [dir_x * random.uniform(8, 14) + random.uniform(-2, 2),
+                               dir_y * random.uniform(8, 14) + random.uniform(-2, 2)],
+                        'life': 1.0,
+                        'size': random.uniform(4, 8),
+                        'color': (0, random.randint(150, 255), 255),
+                        'type': 'droplet',
+                        'trail': []  # Store trail positions
+                    }
+                    self.animation_state['particles'].append(particle)
+                    
+            elif move.type == 'electric':
+                # Create lightning effect
+                for _ in range(num_particles):
+                    particle = {
+                        'pos': list(attacker_pos),
+                        'vel': [dir_x * random.uniform(12, 18) + random.uniform(-3, 3),
+                               dir_y * random.uniform(12, 18) + random.uniform(-3, 3)],
+                        'life': 1.0,
+                        'size': random.uniform(3, 6),
+                        'color': (255, 255, random.randint(0, 50)),
+                        'type': 'lightning',
+                        'branches': []  # Store lightning branch positions
+                    }
+                    self.animation_state['particles'].append(particle)
+                    
+            elif move.type == 'grass':
+                # Create leaf effect
+                for _ in range(num_particles):
+                    particle = {
+                        'pos': list(attacker_pos),
+                        'vel': [dir_x * random.uniform(6, 10) + random.uniform(-2, 2),
+                               dir_y * random.uniform(6, 10) + random.uniform(-2, 2)],
+                        'life': 1.0,
+                        'size': random.uniform(6, 12),
+                        'color': (random.randint(50, 100), 255, random.randint(0, 50)),
+                        'type': 'leaf',
+                        'angle': random.uniform(0, 360),
+                        'spin': random.uniform(-5, 5)  # Rotation speed
+                    }
+                    self.animation_state['particles'].append(particle)
+            
+            else:  # Normal type and others
+                for _ in range(num_particles):
+                    particle = {
+                        'pos': list(attacker_pos),
+                        'vel': [dir_x * random.uniform(8, 12) + random.uniform(-2, 2),
+                               dir_y * random.uniform(8, 12) + random.uniform(-2, 2)],
+                        'life': 1.0,
+                        'size': random.uniform(4, 8),
+                        'color': (255, 255, 255),
+                        'type': 'normal',
+                        'angle': random.uniform(0, 360)
+                    }
+                    self.animation_state['particles'].append(particle)
 
     def update_and_draw_particles(self):
-        pass
+        """Update and draw particle effects with enhanced elemental visuals"""
+        if not self.animation_state:
+            return
+        
+        move = self.animation_state['move']
+        
+        # Update particles
+        for particle in self.animation_state['particles']:
+            # Store previous position for trails
+            prev_pos = list(particle['pos'])
+            
+            # Update position
+            particle['pos'][0] += particle['vel'][0]
+            particle['pos'][1] += particle['vel'][1]
+            
+            # Type-specific updates
+            if particle['type'] == 'flame':
+                particle['angle'] += random.uniform(-10, 10)
+                particle['size'] = max(2, particle['size'] - 0.2)
+                particle['vel'][1] -= 0.2  # Flames rise
+                
+            elif particle['type'] == 'droplet':
+                particle['vel'][1] += 0.3  # Water falls
+                if len(particle.get('trail', [])) > 5:
+                    particle['trail'].pop(0)
+                particle['trail'].append(list(particle['pos']))
+                
+            elif particle['type'] == 'lightning':
+                particle['pos'][0] += math.sin(self.animation_timer * 1.2) * 5
+                if random.random() < 0.1:  # 10% chance to create a branch
+                    particle['branches'].append({
+                        'start': list(particle['pos']),
+                        'angle': random.uniform(0, 360),
+                        'length': random.uniform(5, 15)
+                    })
+                
+            elif particle['type'] == 'leaf':
+                particle['angle'] += particle['spin']
+                particle['vel'][1] += math.sin(self.animation_timer * 0.5) * 0.1
+            
+            # Update velocity with some randomness
+            particle['vel'][0] += random.uniform(-0.2, 0.2)
+            particle['vel'][1] += random.uniform(-0.2, 0.2)
+            
+            # Slower life decrease
+            particle['life'] -= 0.015
+        
+        # Remove dead particles
+        self.animation_state['particles'] = [p for p in self.animation_state['particles'] 
+                                           if p['life'] > 0]
+        
+        # Draw particles
+        for particle in self.animation_state['particles']:
+            alpha = int(255 * particle['life'])
+            base_color = particle['color']
+            pos = [int(particle['pos'][0]), int(particle['pos'][1])]
+            
+            if particle['type'] == 'flame':
+                # Draw flame shape
+                points = []
+                size = particle['size']
+                for i in range(3):
+                    angle = math.radians(particle['angle'] + i * 120)
+                    points.append((
+                        pos[0] + math.cos(angle) * size,
+                        pos[1] + math.sin(angle) * size
+                    ))
+                glow_color = (base_color[0], base_color[1], base_color[2], int(alpha * 0.6))
+                pygame.draw.polygon(self.screen, glow_color, points)
+                
+            elif particle['type'] == 'droplet':
+                # Draw water droplet with trail
+                for trail_pos in particle.get('trail', []):
+                    trail_alpha = int(alpha * 0.3)
+                    trail_color = (base_color[0], base_color[1], base_color[2], trail_alpha)
+                    pygame.draw.circle(self.screen, trail_color, 
+                                    [int(trail_pos[0]), int(trail_pos[1])], 
+                                    int(particle['size'] * 0.5))
+                # Draw main droplet
+                drop_color = (base_color[0], base_color[1], base_color[2], alpha)
+                pygame.draw.circle(self.screen, drop_color, pos, int(particle['size']))
+                
+            elif particle['type'] == 'lightning':
+                # Draw lightning branches
+                for branch in particle.get('branches', []):
+                    end_x = branch['start'][0] + math.cos(math.radians(branch['angle'])) * branch['length']
+                    end_y = branch['start'][1] + math.sin(math.radians(branch['angle'])) * branch['length']
+                    branch_color = (base_color[0], base_color[1], base_color[2], int(alpha * 0.7))
+                    pygame.draw.line(self.screen, branch_color, 
+                                   branch['start'], [end_x, end_y], 2)
+                # Draw main particle
+                main_color = (base_color[0], base_color[1], base_color[2], alpha)
+                pygame.draw.circle(self.screen, main_color, pos, int(particle['size']))
+                
+            elif particle['type'] == 'leaf':
+                # Draw rotating leaf shape
+                leaf_surface = pygame.Surface((20, 20), pygame.SRCALPHA)
+                leaf_color = (base_color[0], base_color[1], base_color[2], alpha)
+                points = [
+                    (10, 0), (15, 5), (15, 15), (10, 20), (5, 15), (5, 5)
+                ]
+                pygame.draw.polygon(leaf_surface, leaf_color, points)
+                rotated = pygame.transform.rotate(leaf_surface, particle['angle'])
+                self.screen.blit(rotated, (pos[0] - rotated.get_width()/2,
+                                         pos[1] - rotated.get_height()/2))
+                
+            else:  # Normal type
+                # Draw star shape
+                glow_color = (base_color[0], base_color[1], base_color[2], int(alpha * 0.6))
+                pygame.draw.circle(self.screen, glow_color, pos, 
+                                 int(particle['size'] * 1.5))
+                main_color = (base_color[0], base_color[1], base_color[2], alpha)
+                pygame.draw.circle(self.screen, main_color, pos, 
+                                 int(particle['size']))
+        
+        # End animation if no particles left
+        if not self.animation_state['particles']:
+            self.animation_state = None
 
     def draw_battle_log_with_fade(self):
         log_surface = pygame.Surface((600, 100))
@@ -516,22 +739,27 @@ class BattleSystem:
             self.animation_state = None
 
     def draw_attack_animation(self):
+        """Draw the attack animation"""
         if not self.animation_state:
             return
             
-        move = self.animation_state['move']
-        effect = self.MOVE_EFFECTS[move['category']]
+        move = self.animation_state['move']  # Get the Move object
         
+        # Draw particles based on move type
         for particle in self.animation_state['particles']:
             alpha = int(255 * particle['life'])
-            color = (*effect['color'], alpha)
+            color = particle['color']  # Use color from particle instead of MOVE_EFFECTS
+            pos = [int(particle['pos'][0]), int(particle['pos'][1])]
             
-            pygame.draw.circle(
-                self.screen,
-                color,
-                [int(particle['pos'][0]), int(particle['pos'][1])],
-                effect['size']
-            )
+            # Draw glow effect
+            glow_radius = int(particle['size'] * 1.5)
+            glow_alpha = int(alpha * 0.5)
+            glow_color = (*color, glow_alpha)
+            pygame.draw.circle(self.screen, glow_color, pos, glow_radius)
+            
+            # Draw main particle
+            main_color = (*color, alpha)
+            pygame.draw.circle(self.screen, main_color, pos, int(particle['size']))
 
     def draw_status_effects(self):
         """Draw status effect indicators"""
