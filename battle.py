@@ -77,13 +77,12 @@ class BattleSystem:
             }
         }
         
-        # Status conditions
         self.STATUS_EFFECTS = {
-            'paralyzed': {'color': (255, 255, 0), 'chance': 0.25},  # Yellow
-            'burned': {'color': (255, 69, 0), 'damage': 0.0625},    # Red-orange
-            'poisoned': {'color': (147, 112, 219), 'damage': 0.125},# Purple
-            'frozen': {'color': (135, 206, 250), 'chance': 0.25},   # Light blue
-            'asleep': {'color': (169, 169, 169), 'turns': (2, 5)}   # Gray
+            'paralyzed': {'color': (255, 255, 0), 'chance': 0.25}, 
+            'burned': {'color': (255, 69, 0), 'damage': 0.0625},
+            'poisoned': {'color': (147, 112, 219), 'damage': 0.125},
+            'frozen': {'color': (135, 206, 250), 'chance': 0.25},  
+            'asleep': {'color': (169, 169, 169), 'turns': (2, 5)}
         }
 
     def start(self, player_data: Dict) -> Dict:
@@ -130,33 +129,30 @@ class BattleSystem:
     def handle_player_turn(self, move_index: int):
         move = self.player_pokemon.moves[move_index]
         
+        # Check if Pokemon is paralyzed and can't move
+        if self.player_pokemon.status_condition == 'paralyzed':
+            if random.random() < self.STATUS_EFFECTS['paralyzed']['chance']:
+                self.battle_log.append(f"{self.player_pokemon.name} is paralyzed and can't move!")
+                return
+        
         if move.current_pp <= 0:
             self.battle_log.append("No PP left for this move!")
             return
         
         move.current_pp -= 1
         
-        # Check if move hits
-        if not self.check_move_hits(self.player_pokemon, self.enemy_pokemon, move):
-            self.battle_log.append(f"{self.player_pokemon.name}'s attack missed!")
-            return
-        
-        # Calculate and apply damage
         damage = self.calculate_damage(self.player_pokemon, self.enemy_pokemon, move)
         self.enemy_pokemon.current_hp -= damage
         
-        # Apply status effects
-        if move.status_effect and random.random() < move.effect_chance:
-            self.enemy_pokemon.apply_status_condition(move.status_effect)
+        # Apply status effect if move has one
+        if move.status_effect and random.random() < 0.8:
+            self.apply_status_effect(self.enemy_pokemon, move.status_effect)
         
-        # Apply stat changes
-        for stat, stages in move.stat_changes.items():
-            self.modify_stat(self.enemy_pokemon, stat, stages)
+        self.update_status_effects(self.player_pokemon)
 
     def calculate_damage(self, attacker: Pokemon, defender: Pokemon, move: Move) -> int:
         # Calculate damage using Pokemon game formula
 
-        # Skip damage calculation for status moves
         if move.category == 'status':
             return 0
             
@@ -192,11 +188,15 @@ class BattleSystem:
         # Calculate final damage
         final_damage = int(base_damage * modifiers)
         
-        return max(1, final_damage)  # Minimum 1 damage
+        return max(1, final_damage) # To ensure damage is at least 1. It is taken from the original Pokemon game and is used to prevent moves doing very little HP damage.
 
     def handle_enemy_turn(self):
-        """Handle enemy's turn in battle"""
-        # Simple AI: randomly select a move
+        # Check if Pokemon is paralyzed and can't move
+        if self.enemy_pokemon.status_condition == 'paralyzed':
+            if random.random() < self.STATUS_EFFECTS['paralyzed']['chance']:
+                self.battle_log.append(f"{self.enemy_pokemon.name} is paralyzed and can't move!")
+                return
+        
         available_moves = [m for m in self.enemy_pokemon.moves if m.current_pp > 0]
         if not available_moves:
             self.battle_log.append(f"{self.enemy_pokemon.name} has no moves left!")
@@ -205,33 +205,15 @@ class BattleSystem:
         move = random.choice(available_moves)
         move.current_pp -= 1
         
-        # Check if move hits
-        if not self.check_move_hits(self.enemy_pokemon, self.player_pokemon, move):
-            self.battle_log.append(f"{self.enemy_pokemon.name}'s attack missed!")
-            return
-        
         damage = self.calculate_damage(self.enemy_pokemon, self.player_pokemon, move)
         self.player_pokemon.current_hp = max(0, self.player_pokemon.current_hp - damage)
         
-        # Effectiveness message
-        effectiveness = self.calculate_type_effectiveness(move.type, self.player_pokemon.types)
-        if effectiveness > 1:
-            self.battle_log.append("It's super effective!")
-        elif effectiveness < 1 and effectiveness > 0:
-            self.battle_log.append("It's not very effective...")
-        elif effectiveness == 0:
-            self.battle_log.append("It has no effect...")
+        # Apply status effect if move has one
+        if move.status_effect and random.random() < 0.8:
+            self.apply_status_effect(self.player_pokemon, move.status_effect)
         
-        # Battle log
-        self.battle_log.append(f"{self.enemy_pokemon.name} used {move.name}!")
-        
-        # Check if fainted
-        if self.player_pokemon.current_hp == 0:
-            self.battle_state = 'end'
-            return
-        
-        # Switch back to player turn
-        self.battle_state = 'player_turn'
+        # Update status effects at end of turn
+        self.update_status_effects(self.enemy_pokemon)
 
     def calculate_type_effectiveness(self, attack_type: str, defender_types: list) -> float:
         """Calculate type effectiveness multiplier"""
@@ -275,7 +257,6 @@ class BattleSystem:
         self.show_message(f"You won! Gained {exp_gain} experience!")
 
     def handle_defeat(self, player_data: Dict):
-        """Handle player defeat"""
         # Remove defeated Pokemon from Pokedex
         defeated_pokemon = self.player_pokemon.to_dict()
         player_data["pokemons"].remove(defeated_pokemon)
@@ -285,8 +266,7 @@ class BattleSystem:
         self.show_message("You lost! Better luck next time!")
 
     def draw_battle(self):
-        """Draw the battle scene"""
-        # Fill background
+        
         self.screen.fill(self.WHITE)
         
         # Draw battle background if available
@@ -301,6 +281,8 @@ class BattleSystem:
         
         # Draw Pokemon sprites and animations
         self.draw_animated_pokemon()
+
+        self.update_and_draw_particles()
         
         # Draw attack animations if active
         if self.animation_state:
@@ -309,12 +291,14 @@ class BattleSystem:
         # Draw HP bars
         self.draw_health_bar(self.enemy_pokemon, (450, 100), False)
         self.draw_health_bar(self.player_pokemon, (50, 300), True)
+
+        self.draw_status_effects()
         
         # Draw battle log with fade effect
         self.draw_battle_log_with_fade()
 
     def draw_health_bar(self, pokemon: Pokemon, position: tuple, is_player: bool):
-        """Draw health bar for Pokemon"""
+
         x, y = position
         max_hp = pokemon.stats["hp"]
         current_hp = pokemon.current_hp
@@ -551,8 +535,56 @@ class BattleSystem:
 
     def draw_status_effects(self):
         """Draw status effect indicators"""
-        # Draw status effect indicators for both Pokemon
-        pass
+        # Status abbreviations dictionary
+        STATUS_ABBREV = {
+            'paralyzed': 'PLZ',
+            'burned': 'BRN',
+            'poisoned': 'PSN',
+            'frozen': 'FRZ',
+            'asleep': 'SLP'
+        }
+        
+        # Draw status indicator for player Pokemon
+        if self.player_pokemon.status_condition:
+            effect = self.STATUS_EFFECTS[self.player_pokemon.status_condition]
+            status_color = effect['color']
+            
+            # Create smaller status indicator surface
+            status_indicator = pygame.Surface((20, 8))
+            status_indicator.fill(status_color)
+            
+            # Position it in upper right corner of HP box
+            player_pos = (50, 300)
+            self.screen.blit(status_indicator, (player_pos[0] + 200, player_pos[1] - 5))
+            
+            # Draw abbreviated status name
+            status_text = self.info_font.render(
+                STATUS_ABBREV[self.player_pokemon.status_condition],
+                True,
+                self.WHITE
+            )
+            self.screen.blit(status_text, (player_pos[0] + 200, player_pos[1] + 5))
+        
+        # Draw status indicator for enemy Pokemon
+        if self.enemy_pokemon.status_condition:
+            effect = self.STATUS_EFFECTS[self.enemy_pokemon.status_condition]
+            status_color = effect['color']
+            
+            # Create smaller status indicator surface
+            status_indicator = pygame.Surface((20, 8))
+            status_indicator.fill(status_color)
+            
+            # Position it in upper right corner of HP box
+            enemy_pos = (450, 100)
+            self.screen.blit(status_indicator, (enemy_pos[0] + 200, enemy_pos[1] - 5))
+            
+            # Draw abbreviated status name
+            status_text = self.info_font.render(
+                STATUS_ABBREV[self.enemy_pokemon.status_condition],
+                True,
+                self.WHITE
+            )
+            self.screen.blit(status_text, (enemy_pos[0] + 200, enemy_pos[1] + 5))
 
     def generate_attack_sprite(self, attack_type: str) -> pygame.Surface:
         surface = pygame.Surface((64, 64), pygame.SRCALPHA)
@@ -609,14 +641,12 @@ class BattleSystem:
             pygame.image.save(sprite, path)
 
     def check_move_hits(self, attacker: Pokemon, defender: Pokemon, move: Move) -> bool:
-        """Check if move hits based on accuracy and evasion"""
+
         if move.accuracy == 0:  
             return True
         
-        # Calculate accuracy
         accuracy = move.accuracy
         
-        # Random check
         return random.uniform(0, 100) <= accuracy
 
     def modify_stat(self, pokemon: Pokemon, stat: str, stages: int):
@@ -664,6 +694,87 @@ class BattleSystem:
         }
         
         return type_colors.get(attack_type.lower(), (128, 128, 128))
+
+    def apply_status_effect(self, pokemon: Pokemon, status: str):
+        if status not in self.STATUS_EFFECTS:
+            return
+        
+        # Don't apply if already has status
+        if pokemon.status_condition:
+            self.battle_log.append(f"{pokemon.name} already has a status condition!")
+            return
+        
+        pokemon.status_condition = status
+        self.battle_log.append(f"{pokemon.name} was {status}!")
+
+    def update_status_effects(self, pokemon: Pokemon):
+        if not pokemon.status_condition:
+            return
+        
+        effect = self.STATUS_EFFECTS[pokemon.status_condition]
+        
+        if pokemon.status_condition == 'burned':
+            damage = int(pokemon.stats['hp'] * effect['damage'])
+            pokemon.current_hp = max(0, pokemon.current_hp - damage)
+            self.battle_log.append(f"{pokemon.name} was hurt by its burn!")
+        
+        elif pokemon.status_condition == 'poisoned':
+            damage = int(pokemon.stats['hp'] * effect['damage'])
+            pokemon.current_hp = max(0, pokemon.current_hp - damage)
+            self.battle_log.append(f"{pokemon.name} was hurt by poison!")
+        
+        elif pokemon.status_condition == 'asleep':
+            if not hasattr(pokemon, 'sleep_turns'):
+                pokemon.sleep_turns = random.randint(*effect['turns'])
+            
+            pokemon.sleep_turns -= 1
+            if pokemon.sleep_turns <= 0:
+                pokemon.status_condition = None
+                self.battle_log.append(f"{pokemon.name} woke up!")
+            else:
+                self.battle_log.append(f"{pokemon.name} is fast asleep!")
+
+    def draw_modern_health_bar(self, pokemon: Pokemon, position: tuple, is_player: bool):
+        x, y = position
+        max_hp = pokemon.stats["hp"]
+        current_hp = pokemon.current_hp
+        hp_percentage = current_hp / max_hp
+        
+        if hp_percentage > 0.5:
+            color = self.HP_COLORS['high']
+        elif hp_percentage > 0.25:
+            color = self.HP_COLORS['medium']
+        else:
+            color = self.HP_COLORS['low']
+        
+        name_plate = pygame.Surface((270, 80))
+        name_plate.set_alpha(200)
+        name_plate.fill((40, 40, 40))
+        self.screen.blit(name_plate, (x - 10, y - 10))
+        
+        name_font = pygame.font.Font(None, 32)
+        self.draw_text(f"{pokemon.name.capitalize()} Lv.{pokemon.level}",
+                      (x, y), name_font, self.WHITE)
+        
+        bar_bg = pygame.Rect(x, y + 30, 220, self.HP_BAR_HEIGHT)
+        pygame.draw.rect(self.screen, (40, 40, 40), bar_bg)
+        
+        bar_width = int(220 * hp_percentage)
+        bar_rect = pygame.Rect(x, y + 30, bar_width, self.HP_BAR_HEIGHT)
+        pygame.draw.rect(self.screen, color, bar_rect)
+        
+        pygame.draw.rect(self.screen, self.WHITE, bar_bg, self.HP_BAR_BORDER)
+        
+        hp_font = pygame.font.Font(None, 20)
+        hp_text = f"{current_hp}/{max_hp}"
+        self.draw_text(hp_text, (x + 230, y + 30),
+                      hp_font, self.WHITE)
+        
+        if pokemon.status_condition:
+            status_color = self.STATUS_EFFECTS[pokemon.status_condition]['color']
+            status_indicator = pygame.Surface((15, 15))
+            status_indicator.fill(status_color)
+            self.screen.blit(status_indicator, (x + 250, y + 5))
 
 def start_battle(screen, player_pokemon, enemy_pokemon):
     battle = BattleSystem(screen, player_pokemon, enemy_pokemon)

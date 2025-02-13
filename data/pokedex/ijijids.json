@@ -1,21 +1,21 @@
 {
-    "name": "ji",
+    "name": "ijijids",
     "pokemons": [
         {
-            "id": 7,
-            "name": "squirtle",
+            "id": 9,
+            "name": "blastoise",
             "types": [
                 "water"
             ],
             "stats": {
-                "hp": 44,
-                "attack": 48,
-                "defense": 65,
-                "special-attack": 50,
-                "special-defense": 64,
-                "speed": 43
+                "hp": 79,
+                "attack": 83,
+                "defense": 100,
+                "special-attack": 85,
+                "special-defense": 105,
+                "speed": 78
             },
-            "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png",
+            "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/9.png",
             "evolution_chain": {
                 "stages": [
                     {

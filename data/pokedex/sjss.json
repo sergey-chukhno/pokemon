@@ -1,22 +1,22 @@
 {
-    "name": "jijis",
+    "name": "sjss",
     "pokemons": [
         {
-            "id": 1,
-            "name": "bulbasaur",
+            "id": 3,
+            "name": "venusaur",
             "types": [
                 "grass",
                 "poison"
             ],
             "stats": {
-                "hp": 45,
-                "attack": 49,
-                "defense": 49,
-                "special-attack": 65,
-                "special-defense": 65,
-                "speed": 45
+                "hp": 80,
+                "attack": 82,
+                "defense": 83,
+                "special-attack": 100,
+                "special-defense": 100,
+                "speed": 80
             },
-            "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+            "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png",
             "evolution_chain": {
                 "stages": [
                     {

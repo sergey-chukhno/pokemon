@@ -1,0 +1,35 @@
+{
+    "name": "\u0449\u043b\u0449",
+    "pokemons": [
+        {
+            "id": 23,
+            "name": "ekans",
+            "types": [
+                "poison"
+            ],
+            "stats": {
+                "hp": 35,
+                "attack": 60,
+                "defense": 44,
+                "special-attack": 40,
+                "special-defense": 54,
+                "speed": 55
+            },
+            "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/23.png",
+            "evolution_chain": {
+                "stages": [
+                    {
+                        "name": "ekans",
+                        "min_level": 1
+                    },
+                    {
+                        "name": "arbok",
+                        "min_level": 17
+                    }
+                ]
+            },
+            "level": 1,
+            "experience": 0
+        }
+    ]
+}
