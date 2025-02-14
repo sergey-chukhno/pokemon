@@ -1,0 +1,40 @@
+{
+    "name": "jjd",
+    "pokemons": [
+        {
+            "id": 1,
+            "name": "bulbasaur",
+            "types": [
+                "grass",
+                "poison"
+            ],
+            "stats": {
+                "hp": 45,
+                "attack": 49,
+                "defense": 49,
+                "special-attack": 65,
+                "special-defense": 65,
+                "speed": 45
+            },
+            "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+            "evolution_chain": {
+                "stages": [
+                    {
+                        "name": "bulbasaur",
+                        "min_level": 1
+                    },
+                    {
+                        "name": "ivysaur",
+                        "min_level": 17
+                    },
+                    {
+                        "name": "venusaur",
+                        "min_level": 33
+                    }
+                ]
+            },
+            "level": 1,
+            "experience": 0
+        }
+    ]
+}

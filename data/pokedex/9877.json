@@ -1,0 +1,39 @@
+{
+    "name": "9877",
+    "pokemons": [
+        {
+            "id": 25,
+            "name": "pikachu",
+            "types": [
+                "electric"
+            ],
+            "stats": {
+                "hp": 35,
+                "attack": 55,
+                "defense": 40,
+                "special-attack": 50,
+                "special-defense": 50,
+                "speed": 90
+            },
+            "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
+            "evolution_chain": {
+                "stages": [
+                    {
+                        "name": "pichu",
+                        "min_level": 1
+                    },
+                    {
+                        "name": "pikachu",
+                        "min_level": 17
+                    },
+                    {
+                        "name": "raichu",
+                        "min_level": 33
+                    }
+                ]
+            },
+            "level": 1,
+            "experience": 0
+        }
+    ]
+}

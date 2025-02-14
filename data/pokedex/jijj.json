@@ -2,32 +2,33 @@
     "name": "jijj",
     "pokemons": [
         {
-            "id": 5,
-            "name": "charmeleon",
+            "id": 1,
+            "name": "bulbasaur",
             "types": [
-                "fire"
+                "grass",
+                "poison"
             ],
             "stats": {
-                "hp": 58,
-                "attack": 64,
-                "defense": 58,
-                "special-attack": 80,
+                "hp": 45,
+                "attack": 49,
+                "defense": 49,
+                "special-attack": 65,
                 "special-defense": 65,
-                "speed": 80
+                "speed": 45
             },
-            "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png",
+            "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
             "evolution_chain": {
                 "stages": [
                     {
-                        "name": "charmander",
+                        "name": "bulbasaur",
                         "min_level": 1
                     },
                     {
-                        "name": "charmeleon",
+                        "name": "ivysaur",
                         "min_level": 17
                     },
                     {
-                        "name": "charizard",
+                        "name": "venusaur",
                         "min_level": 33
                     }
                 ]

@@ -1,0 +1,40 @@
+{
+    "name": "98\u0433\u0443",
+    "pokemons": [
+        {
+            "id": 12,
+            "name": "butterfree",
+            "types": [
+                "bug",
+                "flying"
+            ],
+            "stats": {
+                "hp": 60,
+                "attack": 45,
+                "defense": 50,
+                "special-attack": 90,
+                "special-defense": 80,
+                "speed": 70
+            },
+            "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/12.png",
+            "evolution_chain": {
+                "stages": [
+                    {
+                        "name": "caterpie",
+                        "min_level": 1
+                    },
+                    {
+                        "name": "metapod",
+                        "min_level": 17
+                    },
+                    {
+                        "name": "butterfree",
+                        "min_level": 33
+                    }
+                ]
+            },
+            "level": 1,
+            "experience": 0
+        }
+    ]
+}

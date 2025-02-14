@@ -2,32 +2,33 @@
     "name": "iji",
     "pokemons": [
         {
-            "id": 8,
-            "name": "wartortle",
+            "id": 2,
+            "name": "ivysaur",
             "types": [
-                "water"
+                "grass",
+                "poison"
             ],
             "stats": {
-                "hp": 59,
-                "attack": 63,
-                "defense": 80,
-                "special-attack": 65,
+                "hp": 60,
+                "attack": 62,
+                "defense": 63,
+                "special-attack": 80,
                 "special-defense": 80,
-                "speed": 58
+                "speed": 60
             },
-            "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/8.png",
+            "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png",
             "evolution_chain": {
                 "stages": [
                     {
-                        "name": "squirtle",
+                        "name": "bulbasaur",
                         "min_level": 1
                     },
                     {
-                        "name": "wartortle",
+                        "name": "ivysaur",
                         "min_level": 17
                     },
                     {
-                        "name": "blastoise",
+                        "name": "venusaur",
                         "min_level": 33
                     }
                 ]

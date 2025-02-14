@@ -2,32 +2,32 @@
     "name": "jjs",
     "pokemons": [
         {
-            "id": 8,
-            "name": "wartortle",
+            "id": 4,
+            "name": "charmander",
             "types": [
-                "water"
+                "fire"
             ],
             "stats": {
-                "hp": 59,
-                "attack": 63,
-                "defense": 80,
-                "special-attack": 65,
-                "special-defense": 80,
-                "speed": 58
+                "hp": 39,
+                "attack": 52,
+                "defense": 43,
+                "special-attack": 60,
+                "special-defense": 50,
+                "speed": 65
             },
-            "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/8.png",
+            "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",
             "evolution_chain": {
                 "stages": [
                     {
-                        "name": "squirtle",
+                        "name": "charmander",
                         "min_level": 1
                     },
                     {
-                        "name": "wartortle",
+                        "name": "charmeleon",
                         "min_level": 17
                     },
                     {
-                        "name": "blastoise",
+                        "name": "charizard",
                         "min_level": 33
                     }
                 ]

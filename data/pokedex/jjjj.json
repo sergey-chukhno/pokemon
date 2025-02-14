@@ -1,0 +1,40 @@
+{
+    "name": "jjjj",
+    "pokemons": [
+        {
+            "id": 6,
+            "name": "charizard",
+            "types": [
+                "fire",
+                "flying"
+            ],
+            "stats": {
+                "hp": 78,
+                "attack": 84,
+                "defense": 78,
+                "special-attack": 109,
+                "special-defense": 85,
+                "speed": 100
+            },
+            "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png",
+            "evolution_chain": {
+                "stages": [
+                    {
+                        "name": "charmander",
+                        "min_level": 1
+                    },
+                    {
+                        "name": "charmeleon",
+                        "min_level": 17
+                    },
+                    {
+                        "name": "charizard",
+                        "min_level": 33
+                    }
+                ]
+            },
+            "level": 1,
+            "experience": 0
+        }
+    ]
+}

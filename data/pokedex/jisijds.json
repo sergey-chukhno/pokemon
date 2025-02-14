@@ -1,0 +1,39 @@
+{
+    "name": "jisijds",
+    "pokemons": [
+        {
+            "id": 7,
+            "name": "squirtle",
+            "types": [
+                "water"
+            ],
+            "stats": {
+                "hp": 44,
+                "attack": 48,
+                "defense": 65,
+                "special-attack": 50,
+                "special-defense": 64,
+                "speed": 43
+            },
+            "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png",
+            "evolution_chain": {
+                "stages": [
+                    {
+                        "name": "squirtle",
+                        "min_level": 1
+                    },
+                    {
+                        "name": "wartortle",
+                        "min_level": 17
+                    },
+                    {
+                        "name": "blastoise",
+                        "min_level": 33
+                    }
+                ]
+            },
+            "level": 1,
+            "experience": 0
+        }
+    ]
+}

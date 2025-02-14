@@ -2,32 +2,32 @@
     "name": "jjii",
     "pokemons": [
         {
-            "id": 7,
-            "name": "squirtle",
+            "id": 4,
+            "name": "charmander",
             "types": [
-                "water"
+                "fire"
             ],
             "stats": {
-                "hp": 44,
-                "attack": 48,
-                "defense": 65,
-                "special-attack": 50,
-                "special-defense": 64,
-                "speed": 43
+                "hp": 39,
+                "attack": 52,
+                "defense": 43,
+                "special-attack": 60,
+                "special-defense": 50,
+                "speed": 65
             },
-            "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png",
+            "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",
             "evolution_chain": {
                 "stages": [
                     {
-                        "name": "squirtle",
+                        "name": "charmander",
                         "min_level": 1
                     },
                     {
-                        "name": "wartortle",
+                        "name": "charmeleon",
                         "min_level": 17
                     },
                     {
-                        "name": "blastoise",
+                        "name": "charizard",
                         "min_level": 33
                     }
                 ]

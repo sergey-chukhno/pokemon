@@ -2,20 +2,21 @@
     "name": "jiij",
     "pokemons": [
         {
-            "id": 4,
-            "name": "charmander",
+            "id": 6,
+            "name": "charizard",
             "types": [
-                "fire"
+                "fire",
+                "flying"
             ],
             "stats": {
-                "hp": 39,
-                "attack": 52,
-                "defense": 43,
-                "special-attack": 60,
-                "special-defense": 50,
-                "speed": 65
+                "hp": 78,
+                "attack": 84,
+                "defense": 78,
+                "special-attack": 109,
+                "special-defense": 85,
+                "speed": 100
             },
-            "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",
+            "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png",
             "evolution_chain": {
                 "stages": [
                     {

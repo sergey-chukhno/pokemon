@@ -2,32 +2,33 @@
     "name": "ji",
     "pokemons": [
         {
-            "id": 7,
-            "name": "squirtle",
+            "id": 3,
+            "name": "venusaur",
             "types": [
-                "water"
+                "grass",
+                "poison"
             ],
             "stats": {
-                "hp": 44,
-                "attack": 48,
-                "defense": 65,
-                "special-attack": 50,
-                "special-defense": 64,
-                "speed": 43
+                "hp": 80,
+                "attack": 82,
+                "defense": 83,
+                "special-attack": 100,
+                "special-defense": 100,
+                "speed": 80
             },
-            "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png",
+            "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png",
             "evolution_chain": {
                 "stages": [
                     {
-                        "name": "squirtle",
+                        "name": "bulbasaur",
                         "min_level": 1
                     },
                     {
-                        "name": "wartortle",
+                        "name": "ivysaur",
                         "min_level": 17
                     },
                     {
-                        "name": "blastoise",
+                        "name": "venusaur",
                         "min_level": 33
                     }
                 ]

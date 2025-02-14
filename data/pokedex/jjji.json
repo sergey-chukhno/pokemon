@@ -2,32 +2,33 @@
     "name": "jjji",
     "pokemons": [
         {
-            "id": 4,
-            "name": "charmander",
+            "id": 2,
+            "name": "ivysaur",
             "types": [
-                "fire"
+                "grass",
+                "poison"
             ],
             "stats": {
-                "hp": 39,
-                "attack": 52,
-                "defense": 43,
-                "special-attack": 60,
-                "special-defense": 50,
-                "speed": 65
+                "hp": 60,
+                "attack": 62,
+                "defense": 63,
+                "special-attack": 80,
+                "special-defense": 80,
+                "speed": 60
             },
-            "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",
+            "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png",
             "evolution_chain": {
                 "stages": [
                     {
-                        "name": "charmander",
+                        "name": "bulbasaur",
                         "min_level": 1
                     },
                     {
-                        "name": "charmeleon",
+                        "name": "ivysaur",
                         "min_level": 17
                     },
                     {
-                        "name": "charizard",
+                        "name": "venusaur",
                         "min_level": 33
                     }
                 ]
