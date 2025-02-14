@@ -304,13 +304,16 @@ class BattleSystem:
             self.draw_attack_animation()
         
         # Draw HP bars
-        self.draw_health_bar(self.enemy_pokemon, (450, 100), False)
-        self.draw_health_bar(self.player_pokemon, (50, 300), True)
+        self.draw_modern_health_bar(self.enemy_pokemon, (450, 100), False)
+        self.draw_modern_health_bar(self.player_pokemon, (50, 300), True)
 
         self.draw_status_effects()
         
         # Draw battle log with fade effect
         self.draw_battle_log_with_fade()
+
+        # Draw battle panel
+        self.draw_battle_panel()
 
     def draw_health_bar(self, pokemon: Pokemon, position: tuple, is_player: bool):
 
@@ -654,19 +657,8 @@ class BattleSystem:
             self.animation_state = None
 
     def draw_battle_log_with_fade(self):
-        log_surface = pygame.Surface((600, 100))
-        log_surface.set_alpha(200)
-        log_surface.fill((40, 40, 40))
-        
-        y = 10
-        for i, message in enumerate(self.battle_log[-3:]):
-            alpha = 255 - (i * 50) 
-            text_surface = self.info_font.render(message, True, self.WHITE)
-            text_surface.set_alpha(alpha)
-            log_surface.blit(text_surface, (10, y))
-            y += 30
-            
-        self.screen.blit(log_surface, (100, 500))
+        # Empty method - no longer draws the grey box
+        pass
 
     def draw_text(self, text: str, position: tuple, font: pygame.font.Font, 
                  color: tuple = None, center: bool = False):
@@ -1237,6 +1229,186 @@ class BattleSystem:
                 sounds[key] = pygame.sndarray.make_sound(buffer)
         
         return sounds
+
+    def draw_battle_panel(self):
+        """Draw the battle control panel at the bottom of the screen"""
+        # Panel dimensions and position
+        panel_height = 150
+        panel_width = self.screen.get_width()
+        panel_y = self.screen.get_height() - panel_height
+        
+        # Create semi-transparent panel
+        panel = pygame.Surface((panel_width, panel_height))
+        panel.set_alpha(200)
+        panel.fill((40, 40, 40))
+        
+        # Calculate sections
+        message_section_width = int(panel_width * 0.6)
+        button_section_width = panel_width - message_section_width
+        
+        # Draw divider line
+        pygame.draw.line(panel, (200, 200, 200), 
+                        (message_section_width, 0), 
+                        (message_section_width, panel_height), 2)
+        
+        # Draw message section
+        if not hasattr(self, 'panel_message'):
+            self.panel_message = "What is your next step?"
+        
+        self.draw_message_section(panel, message_section_width)
+        self.draw_button_section(panel, message_section_width)
+        
+        # Draw panel on screen
+        self.screen.blit(panel, (0, panel_y))
+
+    def draw_message_section(self, panel, width):
+        """Draw the message section on the left"""
+        margin = 20
+        message_surface = self.battle_font.render(self.panel_message, True, (255, 255, 255))
+        panel.blit(message_surface, (margin, margin))
+
+    def draw_button_section(self, panel, x_offset):
+        """Draw the button section on the right"""
+        if not hasattr(self, 'panel_state'):
+            self.panel_state = 'main'
+        
+        if self.panel_state == 'main':
+            self.draw_main_buttons(panel, x_offset)
+        elif self.panel_state == 'fight':
+            self.draw_move_buttons(panel, x_offset)
+
+    def draw_main_buttons(self, panel, x_offset):
+        """Draw main menu buttons"""
+        buttons = [
+            {'text': 'Fight', 'hover': 'Choose your attack'},
+            {'text': 'Bag', 'hover': 'Show the content of your bag'},
+            {'text': 'Pokedex', 'hover': 'Select Pokemon from Pokedex'},
+            {'text': 'Run', 'hover': 'Escape the Fight'}
+        ]
+        
+        self.draw_button_grid(panel, x_offset, buttons)
+
+    def draw_move_buttons(self, panel, x_offset):
+        """Draw move selection buttons"""
+        moves = []
+        for move in self.player_pokemon.moves:
+            moves.append({
+                'text': move.name,
+                'hover': f"{move.name}: {move.description}",
+                'move': move
+            })
+        
+        self.draw_button_grid(panel, x_offset, moves)
+
+    def draw_button_grid(self, panel, x_offset, buttons):
+        """Draw a 2x2 grid of buttons"""
+        button_margin = 10
+        button_width = (self.screen.get_width() - x_offset - 3 * button_margin) // 2
+        button_height = 60
+        
+        # Define colors using the same green as HP bars
+        BUTTON_COLORS = {
+            'normal': (50, 50, 50),
+            'hover': (120, 200, 80),  # Same green as high HP
+            'border': (200, 200, 200),
+            'text': (255, 255, 255)
+        }
+        
+        mouse_pos = pygame.mouse.get_pos()
+        panel_y = self.screen.get_height() - panel.get_height()
+        
+        for i, button in enumerate(buttons):
+            row = i // 2
+            col = i % 2
+            
+            x = x_offset + button_margin + (col * (button_width + button_margin))
+            y = button_margin + (row * (button_height + button_margin))
+            
+            rect = pygame.Rect(x, y, button_width, button_height)
+            abs_rect = rect.copy()
+            abs_rect.y += panel_y
+            
+            # Check hover
+            is_hover = abs_rect.collidepoint(mouse_pos)
+            if is_hover:
+                self.panel_message = button['hover']
+                color = BUTTON_COLORS['hover']
+            else:
+                color = BUTTON_COLORS['normal']
+            
+            # Draw button with a slight gradient effect
+            pygame.draw.rect(panel, color, rect)
+            if is_hover:
+                # Add a subtle highlight effect at the top
+                highlight_rect = pygame.Rect(rect.x, rect.y, rect.width, 2)
+                pygame.draw.rect(panel, (255, 255, 255, 128), highlight_rect)
+            
+            # Draw border
+            pygame.draw.rect(panel, BUTTON_COLORS['border'], rect, 2)
+            
+            # Draw text
+            text = self.battle_font.render(button['text'], True, BUTTON_COLORS['text'])
+            text_rect = text.get_rect(center=rect.center)
+            panel.blit(text, text_rect)
+
+    def handle_panel_click(self, pos):
+        """Handle clicks on the panel"""
+        panel_height = 150
+        panel_y = self.screen.get_height() - panel_height
+        message_width = int(self.screen.get_width() * 0.6)
+        
+        # Only handle clicks in button section
+        if pos[0] < message_width or pos[1] < panel_y:
+            return False
+        
+        if self.panel_state == 'main':
+            return self.handle_main_button_click(pos, panel_y, message_width)
+        elif self.panel_state == 'fight':
+            return self.handle_move_button_click(pos, panel_y, message_width)
+        
+        return False
+
+    def handle_main_button_click(self, pos, panel_y, x_offset):
+        """Handle clicks on main menu buttons"""
+        button_index = self.get_clicked_button_index(pos, panel_y, x_offset)
+        if button_index == 0:  # Fight
+            self.panel_state = 'fight'
+            self.panel_message = "Choose your attack"
+            return True
+        elif button_index == 1:  # Bag
+            self.panel_message = "Bag not implemented"
+            return True
+        elif button_index == 2:  # Pokedex
+            # Implement transition to Pokedex
+            return True
+        elif button_index == 3:  # Run
+            # Implement run from battle
+            return True
+        return False
+
+    def handle_move_button_click(self, pos, panel_y, x_offset):
+        """Handle clicks on move buttons"""
+        button_index = self.get_clicked_button_index(pos, panel_y, x_offset)
+        if 0 <= button_index < len(self.player_pokemon.moves):
+            move = self.player_pokemon.moves[button_index]
+            self.panel_message = f"Used {move.name}!"
+            self.panel_state = 'main'
+            # Implement move execution
+            return True
+        return False
+
+    def get_clicked_button_index(self, pos, panel_y, x_offset):
+        """Get the index of the clicked button"""
+        rel_x = pos[0] - x_offset
+        rel_y = pos[1] - panel_y
+        
+        button_width = (self.screen.get_width() - x_offset - 30) // 2
+        button_height = 60
+        
+        col = rel_x // (button_width + 10)
+        row = rel_y // (button_height + 10)
+        
+        return row * 2 + col
 
 def start_battle(screen, player_pokemon, enemy_pokemon):
     battle = BattleSystem(screen, player_pokemon, enemy_pokemon)
