@@ -1,0 +1,40 @@
+{
+    "name": "76667",
+    "pokemons": [
+        {
+            "id": 18,
+            "name": "pidgeot",
+            "types": [
+                "normal",
+                "flying"
+            ],
+            "stats": {
+                "hp": 83,
+                "attack": 80,
+                "defense": 75,
+                "special-attack": 70,
+                "special-defense": 70,
+                "speed": 101
+            },
+            "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/18.png",
+            "evolution_chain": {
+                "stages": [
+                    {
+                        "name": "pidgey",
+                        "min_level": 1
+                    },
+                    {
+                        "name": "pidgeotto",
+                        "min_level": 17
+                    },
+                    {
+                        "name": "pidgeot",
+                        "min_level": 33
+                    }
+                ]
+            },
+            "level": 1,
+            "experience": 0
+        }
+    ]
+}

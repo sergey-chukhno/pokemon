@@ -29,6 +29,9 @@ class PokemonGame:
         self.running = True
 
     def run(self):
+        self.running = True
+        battle_return_data = None
+        
         while self.running:
             result = self.menu.show_main_menu()
             
@@ -37,9 +40,27 @@ class PokemonGame:
             elif result["action"] == "quit":
                 self.running = False
             elif result["action"] == "battle":
-                battle_result = self.battle.start(result["player_data"])
-                if battle_result and battle_result["action"] == "quit":
-                    self.running = False
+                while True:  # Battle-Pokedex loop
+                    battle_result = self.battle.start(result["player_data"])
+                    
+                    if battle_result["action"] == "quit":
+                        self.running = False
+                        break
+                    elif battle_result["action"] == "return_to_menu":
+                        break
+                    elif battle_result["action"] == "open_pokedex":
+                        # Open Pokedex and wait for Pokemon selection
+                        pokedex_result = self.menu.show_pokedex_menu(result["player_data"])
+                        
+                        if pokedex_result["action"] == "quit":
+                            self.running = False
+                            break
+                        elif pokedex_result["action"] == "pokemon_selected":
+                            # Update player's Pokemon and continue battle
+                            result["player_data"]["pokemons"][0] = pokedex_result["selected_pokemon"]
+                            continue
+                        else:
+                            break
 
         pygame.quit()
         sys.exit()

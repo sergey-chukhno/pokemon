@@ -2,33 +2,33 @@
     "name": "99999",
     "pokemons": [
         {
-            "id": 1,
-            "name": "bulbasaur",
+            "id": 15,
+            "name": "beedrill",
             "types": [
-                "grass",
+                "bug",
                 "poison"
             ],
             "stats": {
-                "hp": 45,
-                "attack": 49,
-                "defense": 49,
-                "special-attack": 65,
-                "special-defense": 65,
-                "speed": 45
+                "hp": 65,
+                "attack": 90,
+                "defense": 40,
+                "special-attack": 45,
+                "special-defense": 80,
+                "speed": 75
             },
-            "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+            "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/15.png",
             "evolution_chain": {
                 "stages": [
                     {
-                        "name": "bulbasaur",
+                        "name": "weedle",
                         "min_level": 1
                     },
                     {
-                        "name": "ivysaur",
+                        "name": "kakuna",
                         "min_level": 17
                     },
                     {
-                        "name": "venusaur",
+                        "name": "beedrill",
                         "min_level": 33
                     }
                 ]

@@ -134,7 +134,9 @@ class BattleSystem:
 
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     if event.button == 1:  # Left click
-                        self.handle_panel_click(event.pos)
+                        result = self.handle_panel_click(event.pos)
+                        if isinstance(result, dict) and result.get("action") == "open_pokedex":
+                            return result  # Return to main game loop to handle Pokedex transition
 
     def select_random_enemy(self) -> Pokemon:
         enemy_data = random.choice(list(self.pokemons.values()))
@@ -1374,7 +1376,7 @@ class BattleSystem:
         message_width = int(self.screen.get_width() * 0.6)
         
         # Only process clicks in the button area
-        if pos[1] < panel_y:  # If click is above panel
+        if pos[1] < panel_y:
             return False
         
         # Get relative position in button grid
@@ -1398,16 +1400,16 @@ class BattleSystem:
                     self.panel_state = 'fight'
                     self.panel_message = "Choose your move"
                     return True
+                elif button_index == 2:  # Pokedex button
+                    # Return a special action to open Pokedex
+                    return {"action": "open_pokedex", "return_to": "battle"}
                 
             elif self.panel_state == 'fight':
                 if button_index < len(self.player_pokemon.moves):
                     move = self.player_pokemon.moves[button_index]
                     if move.current_pp > 0:
-                        # Execute the move
                         self.handle_move_selection(move)
-                        # Switch back to main menu
                         self.panel_state = 'main'
-                        # Switch to enemy turn
                         self.battle_state = "enemy_turn"
                         return True
                     else:
@@ -1432,6 +1434,13 @@ class BattleSystem:
         attacker_pos = (200, 350)
         target_pos = (600, 200)
         self.add_attack_particles(attacker_pos, target_pos, move)
+
+    def switch_pokemon(self, new_pokemon: Pokemon):
+        """Switch the current Pokemon with a new one from Pokedex"""
+        self.player_pokemon = new_pokemon
+        self.panel_state = 'main'
+        self.panel_message = f"Go, {new_pokemon.name}!"
+        self.battle_state = "enemy_turn"  # Switching Pokemon uses up a turn
 
 def start_battle(screen, player_pokemon, enemy_pokemon):
     battle = BattleSystem(screen, player_pokemon, enemy_pokemon)

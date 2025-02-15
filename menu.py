@@ -378,4 +378,89 @@ class MenuSystem:
         self.screen.fill(self.WHITE)
         self.draw_text(message, (400, 300), self.menu_font, center=True)
         pygame.display.flip()
-        pygame.time.wait(duration) 
+        pygame.time.wait(duration)
+
+    def show_pokedex_menu(self, player_data: Dict) -> Dict:
+        """Show Pokedex menu and handle Pokemon selection"""
+        # Load pokeball background with direct path
+        try:
+            image_path = os.path.join('images', 'pokeball.png')
+            bg_image = pygame.image.load(image_path)
+            bg_image = pygame.transform.scale(bg_image, self.screen.get_size())
+        except Exception as e:
+            print(f"Error loading pokeball background: {e}")
+            bg_image = None 
+
+        pokemon_list = [Pokemon.from_dict(p) for p in player_data["pokemons"]]
+        selected = 0
+        scroll_offset = 0
+        pokemons_per_page = 3
+        
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    return {"action": "quit"}
+                    
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        selected = max(0, selected - 1)
+                    elif event.key == pygame.K_DOWN:
+                        selected = min(len(pokemon_list) - 1, selected + 1)
+                    elif event.key == pygame.K_RETURN:
+                        return {
+                            "action": "pokemon_selected",
+                            "selected_pokemon": pokemon_list[selected].to_dict()
+                        }
+                    elif event.key == pygame.K_ESCAPE:
+                        return {"action": "return_to_menu"}
+
+            if selected >= scroll_offset + pokemons_per_page:
+                scroll_offset += 1
+            elif selected < scroll_offset:
+                scroll_offset -= 1
+
+            if bg_image:
+                self.screen.blit(bg_image, (0, 0))
+            else:
+                self.screen.fill(self.BLACK)
+            
+            title = "SELECT YOUR POKEMON"
+            for dx, dy in [(2, 2), (-2, -2), (2, -2), (-2, 2)]:
+                self.draw_text(title, (400 + dx, 70 + dy), self.title_font, self.BLACK, center=True)
+            self.draw_text(title, (400, 70), self.title_font, self.BRIGHT_YELLOW, center=True)
+            
+            for i in range(pokemons_per_page):
+                idx = scroll_offset + i
+                if idx >= len(pokemon_list):
+                    break
+                    
+                pokemon = pokemon_list[idx]
+                color = self.BRIGHT_YELLOW if idx == selected else self.WHITE
+                y_pos = 180 + i * 150
+                
+                if idx == selected:
+                    info_rect = pygame.Rect(230, y_pos - 20, 460, 140)
+                    pygame.draw.rect(self.screen, self.BLACK, info_rect)
+                    pygame.draw.rect(self.screen, self.BRIGHT_YELLOW, info_rect, 4)
+                
+                scaled_sprite = pygame.transform.scale(pokemon.sprite, (192, 192))
+                sprite_rect = scaled_sprite.get_rect(center=(150, y_pos + 50))
+                self.screen.blit(scaled_sprite, sprite_rect)
+                
+                name_text = f"{pokemon.name.capitalize()} (Lv.{pokemon.level})"
+                stats_text = f"HP: {pokemon.stats['hp']} ATK: {pokemon.stats['attack']}"
+                types_text = f"Types: {', '.join(pokemon.types)}"
+                
+                for text, y_offset in [(name_text, 0), (stats_text, 30), (types_text, 60)]:
+                    for dx, dy in [(1, 1), (-1, -1), (1, -1), (-1, 1)]:
+                        self.draw_text(text, (280 + dx, y_pos + y_offset + dy), 
+                                     self.menu_font, self.BLACK)
+                    self.draw_text(text, (280, y_pos + y_offset), self.menu_font, color)
+            
+            # Draw navigation hint message
+            hint_text = "Use UP/DOWN to navigate, ENTER to select, ESC to cancel"
+            for dx, dy in [(2, 2), (-2, -2), (2, -2), (-2, 2)]:
+                self.draw_text(hint_text, (400 + dx, 570 + dy), self.info_font, self.BLACK, center=True)
+            self.draw_text(hint_text, (400, 570), self.info_font, self.BRIGHT_YELLOW, center=True)
+            
+            pygame.display.flip() 

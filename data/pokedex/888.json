@@ -2,21 +2,21 @@
     "name": "888",
     "pokemons": [
         {
-            "id": 1,
-            "name": "bulbasaur",
+            "id": 2,
+            "name": "ivysaur",
             "types": [
                 "grass",
                 "poison"
             ],
             "stats": {
-                "hp": 45,
-                "attack": 49,
-                "defense": 49,
-                "special-attack": 65,
-                "special-defense": 65,
-                "speed": 45
+                "hp": 60,
+                "attack": 62,
+                "defense": 63,
+                "special-attack": 80,
+                "special-defense": 80,
+                "speed": 60
             },
-            "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+            "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png",
             "evolution_chain": {
                 "stages": [
                     {
