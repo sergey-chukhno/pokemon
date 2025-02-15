@@ -2,33 +2,33 @@
     "name": "9999",
     "pokemons": [
         {
-            "id": 14,
-            "name": "kakuna",
+            "id": 1,
+            "name": "bulbasaur",
             "types": [
-                "bug",
+                "grass",
                 "poison"
             ],
             "stats": {
                 "hp": 45,
-                "attack": 25,
-                "defense": 50,
-                "special-attack": 25,
-                "special-defense": 25,
-                "speed": 35
+                "attack": 49,
+                "defense": 49,
+                "special-attack": 65,
+                "special-defense": 65,
+                "speed": 45
             },
-            "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/14.png",
+            "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
             "evolution_chain": {
                 "stages": [
                     {
-                        "name": "weedle",
+                        "name": "bulbasaur",
                         "min_level": 1
                     },
                     {
-                        "name": "kakuna",
+                        "name": "ivysaur",
                         "min_level": 17
                     },
                     {
-                        "name": "beedrill",
+                        "name": "venusaur",
                         "min_level": 33
                     }
                 ]

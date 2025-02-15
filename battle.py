@@ -90,18 +90,26 @@ class BattleSystem:
         pygame.mixer.init(frequency=44100, size=-16, channels=2)
         self.sounds = self.generate_sound_effects()
 
+        # Add panel state
+        self.panel_state = 'main'
+        self.panel_message = "What is your next step?"
+
     def start(self, player_data: Dict) -> Dict:
         self.player_pokemon = Pokemon.from_dict(player_data["pokemons"][0])
         self.enemy_pokemon = self.select_random_enemy()
-        self.battle_log = []
         self.battle_state = "player_turn"
         
         while True:
+            # Draw the battle scene first
+            self.draw_battle()
+            pygame.display.flip()
+            
+            # Then handle events
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     return {"action": "quit"}
                 
-                if event.type == pygame.KEYDOWN:
+                elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         return {"action": "return_to_menu"}
                     
@@ -124,8 +132,9 @@ class BattleSystem:
                         
                         self.battle_state = "player_turn"
 
-            self.draw_battle()
-            pygame.display.flip()
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    if event.button == 1:  # Left click
+                        self.handle_panel_click(event.pos)
 
     def select_random_enemy(self) -> Pokemon:
         enemy_data = random.choice(list(self.pokemons.values()))
@@ -1289,16 +1298,23 @@ class BattleSystem:
         self.draw_button_grid(panel, x_offset, buttons)
 
     def draw_move_buttons(self, panel, x_offset):
-        """Draw move selection buttons"""
-        moves = []
+        """Draw the move buttons when in fight state"""
+        buttons = []
         for move in self.player_pokemon.moves:
-            moves.append({
+            hover_text = f"{move.name}: Power {move.power}, Type {move.type}"
+            if move.status_effect:
+                hover_text += f", Effect: {move.status_effect}"
+            buttons.append({
                 'text': move.name,
-                'hover': f"{move.name}: {move.description}",
-                'move': move
+                'hover': hover_text,
+                'pp': f"PP {move.current_pp}/{move.pp}"
             })
         
-        self.draw_button_grid(panel, x_offset, moves)
+        # Pad with empty buttons if less than 4 moves
+        while len(buttons) < 4:
+            buttons.append({'text': '-', 'hover': 'No move available', 'pp': ''})
+        
+        self.draw_button_grid(panel, x_offset, buttons)
 
     def draw_button_grid(self, panel, x_offset, buttons):
         """Draw a 2x2 grid of buttons"""
@@ -1357,44 +1373,19 @@ class BattleSystem:
         panel_y = self.screen.get_height() - panel_height
         message_width = int(self.screen.get_width() * 0.6)
         
-        # Only handle clicks in button section
+        # Only process clicks in the button area
         if pos[0] < message_width or pos[1] < panel_y:
             return False
         
-        if self.panel_state == 'main':
-            return self.handle_main_button_click(pos, panel_y, message_width)
-        elif self.panel_state == 'fight':
-            return self.handle_move_button_click(pos, panel_y, message_width)
+        button_clicked = self.get_clicked_button_index(pos, panel_y, message_width)
+        print(f"Button clicked: {button_clicked}")  # Debug print
         
-        return False
-
-    def handle_main_button_click(self, pos, panel_y, x_offset):
-        """Handle clicks on main menu buttons"""
-        button_index = self.get_clicked_button_index(pos, panel_y, x_offset)
-        if button_index == 0:  # Fight
+        if button_clicked == 0:  # Fight button
+            print("Fight button clicked!")  # Debug print
             self.panel_state = 'fight'
-            self.panel_message = "Choose your attack"
+            self.panel_message = "Choose your move"
             return True
-        elif button_index == 1:  # Bag
-            self.panel_message = "Bag not implemented"
-            return True
-        elif button_index == 2:  # Pokedex
-            # Implement transition to Pokedex
-            return True
-        elif button_index == 3:  # Run
-            # Implement run from battle
-            return True
-        return False
-
-    def handle_move_button_click(self, pos, panel_y, x_offset):
-        """Handle clicks on move buttons"""
-        button_index = self.get_clicked_button_index(pos, panel_y, x_offset)
-        if 0 <= button_index < len(self.player_pokemon.moves):
-            move = self.player_pokemon.moves[button_index]
-            self.panel_message = f"Used {move.name}!"
-            self.panel_state = 'main'
-            # Implement move execution
-            return True
+        
         return False
 
     def get_clicked_button_index(self, pos, panel_y, x_offset):
