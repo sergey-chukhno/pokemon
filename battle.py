@@ -1374,32 +1374,64 @@ class BattleSystem:
         message_width = int(self.screen.get_width() * 0.6)
         
         # Only process clicks in the button area
-        if pos[0] < message_width or pos[1] < panel_y:
+        if pos[1] < panel_y:  # If click is above panel
             return False
         
-        button_clicked = self.get_clicked_button_index(pos, panel_y, message_width)
-        print(f"Button clicked: {button_clicked}")  # Debug print
+        # Get relative position in button grid
+        rel_x = pos[0] - message_width
+        rel_y = pos[1] - panel_y
         
-        if button_clicked == 0:  # Fight button
-            print("Fight button clicked!")  # Debug print
-            self.panel_state = 'fight'
-            self.panel_message = "Choose your move"
-            return True
+        # Calculate button dimensions
+        button_width = (self.screen.get_width() - message_width - 30) // 2
+        button_height = 60
+        button_margin = 10
+        
+        # Calculate which button was clicked
+        col = int(rel_x // (button_width + button_margin))
+        row = int(rel_y // (button_height + button_margin))
+        
+        if 0 <= col < 2 and 0 <= row < 2:
+            button_index = row * 2 + col
+            
+            if self.panel_state == 'main':
+                if button_index == 0:  # Fight button
+                    self.panel_state = 'fight'
+                    self.panel_message = "Choose your move"
+                    return True
+                
+            elif self.panel_state == 'fight':
+                if button_index < len(self.player_pokemon.moves):
+                    move = self.player_pokemon.moves[button_index]
+                    if move.current_pp > 0:
+                        # Execute the move
+                        self.handle_move_selection(move)
+                        # Switch back to main menu
+                        self.panel_state = 'main'
+                        # Switch to enemy turn
+                        self.battle_state = "enemy_turn"
+                        return True
+                    else:
+                        self.panel_message = "No PP left for this move!"
+                        return True
         
         return False
 
-    def get_clicked_button_index(self, pos, panel_y, x_offset):
-        """Get the index of the clicked button"""
-        rel_x = pos[0] - x_offset
-        rel_y = pos[1] - panel_y
+    def handle_move_selection(self, move):
+        """Handle when a move is selected"""
+        # Update message
+        self.panel_message = f"Used {move.name}!"
         
-        button_width = (self.screen.get_width() - x_offset - 30) // 2
-        button_height = 60
+        # Decrease PP
+        move.current_pp -= 1
         
-        col = rel_x // (button_width + 10)
-        row = rel_y // (button_height + 10)
+        # Calculate and apply damage
+        damage = self.calculate_damage(self.player_pokemon, self.enemy_pokemon, move)
+        self.enemy_pokemon.current_hp = max(0, self.enemy_pokemon.current_hp - damage)
         
-        return row * 2 + col
+        # Add attack animation
+        attacker_pos = (200, 350)
+        target_pos = (600, 200)
+        self.add_attack_particles(attacker_pos, target_pos, move)
 
 def start_battle(screen, player_pokemon, enemy_pokemon):
     battle = BattleSystem(screen, player_pokemon, enemy_pokemon)
