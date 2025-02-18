@@ -1,5 +1,5 @@
-{
-    "bulbasaur": {
+[
+    {
         "id": 1,
         "name": "bulbasaur",
         "types": [
@@ -10,31 +10,17 @@
             "hp": 45,
             "attack": 49,
             "defense": 49,
-            "special-attack": 65,
-            "special-defense": 65,
             "speed": 45
         },
-        "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-        "evolution_chain": {
-            "stages": [
-                {
-                    "name": "bulbasaur",
-                    "min_level": 1
-                },
-                {
-                    "name": "ivysaur",
-                    "min_level": 17
-                },
-                {
-                    "name": "venusaur",
-                    "min_level": 33
-                }
-            ]
-        },
-        "level": 1,
-        "experience": 0
+        "moves": [
+            "razor-wind",
+            "swords-dance",
+            "cut",
+            "bind"
+        ],
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/1.png"
     },
-    "ivysaur": {
+    {
         "id": 2,
         "name": "ivysaur",
         "types": [
@@ -45,31 +31,17 @@
             "hp": 60,
             "attack": 62,
             "defense": 63,
-            "special-attack": 80,
-            "special-defense": 80,
             "speed": 60
         },
-        "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png",
-        "evolution_chain": {
-            "stages": [
-                {
-                    "name": "bulbasaur",
-                    "min_level": 1
-                },
-                {
-                    "name": "ivysaur",
-                    "min_level": 17
-                },
-                {
-                    "name": "venusaur",
-                    "min_level": 33
-                }
-            ]
-        },
-        "level": 1,
-        "experience": 0
+        "moves": [
+            "swords-dance",
+            "cut",
+            "bind",
+            "vine-whip"
+        ],
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/2.png"
     },
-    "venusaur": {
+    {
         "id": 3,
         "name": "venusaur",
         "types": [
@@ -80,31 +52,17 @@
             "hp": 80,
             "attack": 82,
             "defense": 83,
-            "special-attack": 100,
-            "special-defense": 100,
             "speed": 80
         },
-        "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png",
-        "evolution_chain": {
-            "stages": [
-                {
-                    "name": "bulbasaur",
-                    "min_level": 1
-                },
-                {
-                    "name": "ivysaur",
-                    "min_level": 17
-                },
-                {
-                    "name": "venusaur",
-                    "min_level": 33
-                }
-            ]
-        },
-        "level": 1,
-        "experience": 0
+        "moves": [
+            "swords-dance",
+            "cut",
+            "bind",
+            "vine-whip"
+        ],
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/3.png"
     },
-    "charmander": {
+    {
         "id": 4,
         "name": "charmander",
         "types": [
@@ -114,31 +72,17 @@
             "hp": 39,
             "attack": 52,
             "defense": 43,
-            "special-attack": 60,
-            "special-defense": 50,
             "speed": 65
         },
-        "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",
-        "evolution_chain": {
-            "stages": [
-                {
-                    "name": "charmander",
-                    "min_level": 1
-                },
-                {
-                    "name": "charmeleon",
-                    "min_level": 17
-                },
-                {
-                    "name": "charizard",
-                    "min_level": 33
-                }
-            ]
-        },
-        "level": 1,
-        "experience": 0
+        "moves": [
+            "mega-punch",
+            "fire-punch",
+            "thunder-punch",
+            "scratch"
+        ],
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/4.png"
     },
-    "charmeleon": {
+    {
         "id": 5,
         "name": "charmeleon",
         "types": [
@@ -148,31 +92,17 @@
             "hp": 58,
             "attack": 64,
             "defense": 58,
-            "special-attack": 80,
-            "special-defense": 65,
             "speed": 80
         },
-        "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png",
-        "evolution_chain": {
-            "stages": [
-                {
-                    "name": "charmander",
-                    "min_level": 1
-                },
-                {
-                    "name": "charmeleon",
-                    "min_level": 17
-                },
-                {
-                    "name": "charizard",
-                    "min_level": 33
-                }
-            ]
-        },
-        "level": 1,
-        "experience": 0
+        "moves": [
+            "mega-punch",
+            "fire-punch",
+            "thunder-punch",
+            "scratch"
+        ],
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/5.png"
     },
-    "charizard": {
+    {
         "id": 6,
         "name": "charizard",
         "types": [
@@ -183,31 +113,17 @@
             "hp": 78,
             "attack": 84,
             "defense": 78,
-            "special-attack": 109,
-            "special-defense": 85,
             "speed": 100
         },
-        "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png",
-        "evolution_chain": {
-            "stages": [
-                {
-                    "name": "charmander",
-                    "min_level": 1
-                },
-                {
-                    "name": "charmeleon",
-                    "min_level": 17
-                },
-                {
-                    "name": "charizard",
-                    "min_level": 33
-                }
-            ]
-        },
-        "level": 1,
-        "experience": 0
+        "moves": [
+            "mega-punch",
+            "fire-punch",
+            "thunder-punch",
+            "scratch"
+        ],
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/6.png"
     },
-    "squirtle": {
+    {
         "id": 7,
         "name": "squirtle",
         "types": [
@@ -217,31 +133,17 @@
             "hp": 44,
             "attack": 48,
             "defense": 65,
-            "special-attack": 50,
-            "special-defense": 64,
             "speed": 43
         },
-        "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png",
-        "evolution_chain": {
-            "stages": [
-                {
-                    "name": "squirtle",
-                    "min_level": 1
-                },
-                {
-                    "name": "wartortle",
-                    "min_level": 17
-                },
-                {
-                    "name": "blastoise",
-                    "min_level": 33
-                }
-            ]
-        },
-        "level": 1,
-        "experience": 0
+        "moves": [
+            "mega-punch",
+            "ice-punch",
+            "mega-kick",
+            "headbutt"
+        ],
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/7.png"
     },
-    "wartortle": {
+    {
         "id": 8,
         "name": "wartortle",
         "types": [
@@ -251,31 +153,17 @@
             "hp": 59,
             "attack": 63,
             "defense": 80,
-            "special-attack": 65,
-            "special-defense": 80,
             "speed": 58
         },
-        "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/8.png",
-        "evolution_chain": {
-            "stages": [
-                {
-                    "name": "squirtle",
-                    "min_level": 1
-                },
-                {
-                    "name": "wartortle",
-                    "min_level": 17
-                },
-                {
-                    "name": "blastoise",
-                    "min_level": 33
-                }
-            ]
-        },
-        "level": 1,
-        "experience": 0
+        "moves": [
+            "mega-punch",
+            "ice-punch",
+            "mega-kick",
+            "headbutt"
+        ],
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/8.png"
     },
-    "blastoise": {
+    {
         "id": 9,
         "name": "blastoise",
         "types": [
@@ -285,31 +173,17 @@
             "hp": 79,
             "attack": 83,
             "defense": 100,
-            "special-attack": 85,
-            "special-defense": 105,
             "speed": 78
         },
-        "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/9.png",
-        "evolution_chain": {
-            "stages": [
-                {
-                    "name": "squirtle",
-                    "min_level": 1
-                },
-                {
-                    "name": "wartortle",
-                    "min_level": 17
-                },
-                {
-                    "name": "blastoise",
-                    "min_level": 33
-                }
-            ]
-        },
-        "level": 1,
-        "experience": 0
+        "moves": [
+            "mega-punch",
+            "ice-punch",
+            "mega-kick",
+            "headbutt"
+        ],
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/9.png"
     },
-    "caterpie": {
+    {
         "id": 10,
         "name": "caterpie",
         "types": [
@@ -319,31 +193,17 @@
             "hp": 45,
             "attack": 30,
             "defense": 35,
-            "special-attack": 20,
-            "special-defense": 20,
             "speed": 45
         },
-        "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10.png",
-        "evolution_chain": {
-            "stages": [
-                {
-                    "name": "caterpie",
-                    "min_level": 1
-                },
-                {
-                    "name": "metapod",
-                    "min_level": 17
-                },
-                {
-                    "name": "butterfree",
-                    "min_level": 33
-                }
-            ]
-        },
-        "level": 1,
-        "experience": 0
+        "moves": [
+            "tackle",
+            "string-shot",
+            "snore",
+            "bug-bite"
+        ],
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/10.png"
     },
-    "metapod": {
+    {
         "id": 11,
         "name": "metapod",
         "types": [
@@ -353,31 +213,17 @@
             "hp": 50,
             "attack": 20,
             "defense": 55,
-            "special-attack": 25,
-            "special-defense": 25,
             "speed": 30
         },
-        "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/11.png",
-        "evolution_chain": {
-            "stages": [
-                {
-                    "name": "caterpie",
-                    "min_level": 1
-                },
-                {
-                    "name": "metapod",
-                    "min_level": 17
-                },
-                {
-                    "name": "butterfree",
-                    "min_level": 33
-                }
-            ]
-        },
-        "level": 1,
-        "experience": 0
+        "moves": [
+            "string-shot",
+            "harden",
+            "iron-defense",
+            "bug-bite"
+        ],
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/11.png"
     },
-    "butterfree": {
+    {
         "id": 12,
         "name": "butterfree",
         "types": [
@@ -388,31 +234,17 @@
             "hp": 60,
             "attack": 45,
             "defense": 50,
-            "special-attack": 90,
-            "special-defense": 80,
             "speed": 70
         },
-        "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/12.png",
-        "evolution_chain": {
-            "stages": [
-                {
-                    "name": "caterpie",
-                    "min_level": 1
-                },
-                {
-                    "name": "metapod",
-                    "min_level": 17
-                },
-                {
-                    "name": "butterfree",
-                    "min_level": 33
-                }
-            ]
-        },
-        "level": 1,
-        "experience": 0
+        "moves": [
+            "razor-wind",
+            "gust",
+            "whirlwind",
+            "headbutt"
+        ],
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/12.png"
     },
-    "weedle": {
+    {
         "id": 13,
         "name": "weedle",
         "types": [
@@ -423,31 +255,17 @@
             "hp": 40,
             "attack": 35,
             "defense": 30,
-            "special-attack": 20,
-            "special-defense": 20,
             "speed": 50
         },
-        "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/13.png",
-        "evolution_chain": {
-            "stages": [
-                {
-                    "name": "weedle",
-                    "min_level": 1
-                },
-                {
-                    "name": "kakuna",
-                    "min_level": 17
-                },
-                {
-                    "name": "beedrill",
-                    "min_level": 33
-                }
-            ]
-        },
-        "level": 1,
-        "experience": 0
+        "moves": [
+            "poison-sting",
+            "string-shot",
+            "bug-bite",
+            "electroweb"
+        ],
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/13.png"
     },
-    "kakuna": {
+    {
         "id": 14,
         "name": "kakuna",
         "types": [
@@ -458,31 +276,17 @@
             "hp": 45,
             "attack": 25,
             "defense": 50,
-            "special-attack": 25,
-            "special-defense": 25,
             "speed": 35
         },
-        "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/14.png",
-        "evolution_chain": {
-            "stages": [
-                {
-                    "name": "weedle",
-                    "min_level": 1
-                },
-                {
-                    "name": "kakuna",
-                    "min_level": 17
-                },
-                {
-                    "name": "beedrill",
-                    "min_level": 33
-                }
-            ]
-        },
-        "level": 1,
-        "experience": 0
+        "moves": [
+            "string-shot",
+            "harden",
+            "iron-defense",
+            "bug-bite"
+        ],
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/14.png"
     },
-    "beedrill": {
+    {
         "id": 15,
         "name": "beedrill",
         "types": [
@@ -493,31 +297,17 @@
             "hp": 65,
             "attack": 90,
             "defense": 40,
-            "special-attack": 45,
-            "special-defense": 80,
             "speed": 75
         },
-        "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/15.png",
-        "evolution_chain": {
-            "stages": [
-                {
-                    "name": "weedle",
-                    "min_level": 1
-                },
-                {
-                    "name": "kakuna",
-                    "min_level": 17
-                },
-                {
-                    "name": "beedrill",
-                    "min_level": 33
-                }
-            ]
-        },
-        "level": 1,
-        "experience": 0
+        "moves": [
+            "swords-dance",
+            "cut",
+            "headbutt",
+            "fury-attack"
+        ],
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/15.png"
     },
-    "pidgey": {
+    {
         "id": 16,
         "name": "pidgey",
         "types": [
@@ -528,31 +318,17 @@
             "hp": 40,
             "attack": 45,
             "defense": 40,
-            "special-attack": 35,
-            "special-defense": 35,
             "speed": 56
         },
-        "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/16.png",
-        "evolution_chain": {
-            "stages": [
-                {
-                    "name": "pidgey",
-                    "min_level": 1
-                },
-                {
-                    "name": "pidgeotto",
-                    "min_level": 17
-                },
-                {
-                    "name": "pidgeot",
-                    "min_level": 33
-                }
-            ]
-        },
-        "level": 1,
-        "experience": 0
+        "moves": [
+            "razor-wind",
+            "gust",
+            "wing-attack",
+            "whirlwind"
+        ],
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/16.png"
     },
-    "pidgeotto": {
+    {
         "id": 17,
         "name": "pidgeotto",
         "types": [
@@ -563,31 +339,17 @@
             "hp": 63,
             "attack": 60,
             "defense": 55,
-            "special-attack": 50,
-            "special-defense": 50,
             "speed": 71
         },
-        "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/17.png",
-        "evolution_chain": {
-            "stages": [
-                {
-                    "name": "pidgey",
-                    "min_level": 1
-                },
-                {
-                    "name": "pidgeotto",
-                    "min_level": 17
-                },
-                {
-                    "name": "pidgeot",
-                    "min_level": 33
-                }
-            ]
-        },
-        "level": 1,
-        "experience": 0
+        "moves": [
+            "razor-wind",
+            "gust",
+            "wing-attack",
+            "whirlwind"
+        ],
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/17.png"
     },
-    "pidgeot": {
+    {
         "id": 18,
         "name": "pidgeot",
         "types": [
@@ -598,31 +360,17 @@
             "hp": 83,
             "attack": 80,
             "defense": 75,
-            "special-attack": 70,
-            "special-defense": 70,
             "speed": 101
         },
-        "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/18.png",
-        "evolution_chain": {
-            "stages": [
-                {
-                    "name": "pidgey",
-                    "min_level": 1
-                },
-                {
-                    "name": "pidgeotto",
-                    "min_level": 17
-                },
-                {
-                    "name": "pidgeot",
-                    "min_level": 33
-                }
-            ]
-        },
-        "level": 1,
-        "experience": 0
+        "moves": [
+            "razor-wind",
+            "gust",
+            "wing-attack",
+            "whirlwind"
+        ],
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/18.png"
     },
-    "rattata": {
+    {
         "id": 19,
         "name": "rattata",
         "types": [
@@ -632,27 +380,17 @@
             "hp": 30,
             "attack": 56,
             "defense": 35,
-            "special-attack": 25,
-            "special-defense": 35,
             "speed": 72
         },
-        "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/19.png",
-        "evolution_chain": {
-            "stages": [
-                {
-                    "name": "rattata",
-                    "min_level": 1
-                },
-                {
-                    "name": "raticate",
-                    "min_level": 17
-                }
-            ]
-        },
-        "level": 1,
-        "experience": 0
+        "moves": [
+            "cut",
+            "headbutt",
+            "tackle",
+            "body-slam"
+        ],
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/19.png"
     },
-    "raticate": {
+    {
         "id": 20,
         "name": "raticate",
         "types": [
@@ -662,27 +400,17 @@
             "hp": 55,
             "attack": 81,
             "defense": 60,
-            "special-attack": 50,
-            "special-defense": 70,
             "speed": 97
         },
-        "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/20.png",
-        "evolution_chain": {
-            "stages": [
-                {
-                    "name": "rattata",
-                    "min_level": 1
-                },
-                {
-                    "name": "raticate",
-                    "min_level": 17
-                }
-            ]
-        },
-        "level": 1,
-        "experience": 0
+        "moves": [
+            "swords-dance",
+            "cut",
+            "headbutt",
+            "tackle"
+        ],
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/20.png"
     },
-    "spearow": {
+    {
         "id": 21,
         "name": "spearow",
         "types": [
@@ -693,27 +421,17 @@
             "hp": 40,
             "attack": 60,
             "defense": 30,
-            "special-attack": 31,
-            "special-defense": 31,
             "speed": 70
         },
-        "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/21.png",
-        "evolution_chain": {
-            "stages": [
-                {
-                    "name": "spearow",
-                    "min_level": 1
-                },
-                {
-                    "name": "fearow",
-                    "min_level": 17
-                }
-            ]
-        },
-        "level": 1,
-        "experience": 0
+        "moves": [
+            "razor-wind",
+            "wing-attack",
+            "whirlwind",
+            "fly"
+        ],
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/21.png"
     },
-    "fearow": {
+    {
         "id": 22,
         "name": "fearow",
         "types": [
@@ -724,27 +442,17 @@
             "hp": 65,
             "attack": 90,
             "defense": 65,
-            "special-attack": 61,
-            "special-defense": 61,
             "speed": 100
         },
-        "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/22.png",
-        "evolution_chain": {
-            "stages": [
-                {
-                    "name": "spearow",
-                    "min_level": 1
-                },
-                {
-                    "name": "fearow",
-                    "min_level": 17
-                }
-            ]
-        },
-        "level": 1,
-        "experience": 0
+        "moves": [
+            "razor-wind",
+            "wing-attack",
+            "whirlwind",
+            "fly"
+        ],
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/22.png"
     },
-    "ekans": {
+    {
         "id": 23,
         "name": "ekans",
         "types": [
@@ -754,27 +462,17 @@
             "hp": 35,
             "attack": 60,
             "defense": 44,
-            "special-attack": 40,
-            "special-defense": 54,
             "speed": 55
         },
-        "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/23.png",
-        "evolution_chain": {
-            "stages": [
-                {
-                    "name": "ekans",
-                    "min_level": 1
-                },
-                {
-                    "name": "arbok",
-                    "min_level": 17
-                }
-            ]
-        },
-        "level": 1,
-        "experience": 0
+        "moves": [
+            "bind",
+            "slam",
+            "headbutt",
+            "body-slam"
+        ],
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/23.png"
     },
-    "arbok": {
+    {
         "id": 24,
         "name": "arbok",
         "types": [
@@ -784,27 +482,17 @@
             "hp": 60,
             "attack": 95,
             "defense": 69,
-            "special-attack": 65,
-            "special-defense": 79,
             "speed": 80
         },
-        "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/24.png",
-        "evolution_chain": {
-            "stages": [
-                {
-                    "name": "ekans",
-                    "min_level": 1
-                },
-                {
-                    "name": "arbok",
-                    "min_level": 17
-                }
-            ]
-        },
-        "level": 1,
-        "experience": 0
+        "moves": [
+            "bind",
+            "slam",
+            "headbutt",
+            "body-slam"
+        ],
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/24.png"
     },
-    "pikachu": {
+    {
         "id": 25,
         "name": "pikachu",
         "types": [
@@ -814,28 +502,114 @@
             "hp": 35,
             "attack": 55,
             "defense": 40,
-            "special-attack": 50,
-            "special-defense": 50,
             "speed": 90
         },
-        "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
-        "evolution_chain": {
-            "stages": [
-                {
-                    "name": "pichu",
-                    "min_level": 1
-                },
-                {
-                    "name": "pikachu",
-                    "min_level": 17
-                },
-                {
-                    "name": "raichu",
-                    "min_level": 33
-                }
-            ]
+        "moves": [
+            "mega-punch",
+            "pay-day",
+            "thunder-punch",
+            "slam"
+        ],
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/25.png"
+    },
+    {
+        "id": 26,
+        "name": "raichu",
+        "types": [
+            "electric"
+        ],
+        "stats": {
+            "hp": 60,
+            "attack": 90,
+            "defense": 55,
+            "speed": 110
         },
-        "level": 1,
-        "experience": 0
+        "moves": [
+            "mega-punch",
+            "pay-day",
+            "thunder-punch",
+            "slam"
+        ],
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/26.png"
+    },
+    {
+        "id": 27,
+        "name": "sandshrew",
+        "types": [
+            "ground"
+        ],
+        "stats": {
+            "hp": 50,
+            "attack": 75,
+            "defense": 85,
+            "speed": 40
+        },
+        "moves": [
+            "scratch",
+            "swords-dance",
+            "cut",
+            "sand-attack"
+        ],
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/27.png"
+    },
+    {
+        "id": 28,
+        "name": "sandslash",
+        "types": [
+            "ground"
+        ],
+        "stats": {
+            "hp": 75,
+            "attack": 100,
+            "defense": 110,
+            "speed": 65
+        },
+        "moves": [
+            "scratch",
+            "swords-dance",
+            "cut",
+            "sand-attack"
+        ],
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/28.png"
+    },
+    {
+        "id": 29,
+        "name": "nidoran-f",
+        "types": [
+            "poison"
+        ],
+        "stats": {
+            "hp": 55,
+            "attack": 47,
+            "defense": 52,
+            "speed": 41
+        },
+        "moves": [
+            "scratch",
+            "cut",
+            "double-kick",
+            "headbutt"
+        ],
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/29.png"
+    },
+    {
+        "id": 30,
+        "name": "nidorina",
+        "types": [
+            "poison"
+        ],
+        "stats": {
+            "hp": 70,
+            "attack": 62,
+            "defense": 67,
+            "speed": 56
+        },
+        "moves": [
+            "scratch",
+            "cut",
+            "double-kick",
+            "headbutt"
+        ],
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/30.png"
     }
-}
+]
