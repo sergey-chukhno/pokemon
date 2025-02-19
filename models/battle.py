@@ -405,10 +405,14 @@ class BattleSystem:
         if attack_type in self.attack_frames and self.attack_frames[attack_type]:
             frames = self.attack_frames[attack_type]
             
+            # Store current music channel state
+            current_music = pygame.mixer.Channel(0).get_busy()
+            
             if attack_type in self.attack_sounds:
                 try:
-                    pygame.mixer.stop()  
-                    self.attack_sounds[attack_type].play()
+                    # Use a different channel for attack sounds
+                    attack_channel = pygame.mixer.Channel(1)
+                    attack_channel.play(self.attack_sounds[attack_type])
                     print(f"Playing {attack_type} sound")
                 except Exception as e:
                     print(f"Error playing sound: {e}")

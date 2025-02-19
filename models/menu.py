@@ -1,6 +1,7 @@
 import pygame
 import os
 from config import *
+from data.data_loader import load_player_pokedex
 
 class Button:
     def __init__(self, x, y, width, height, text, color, hover_color):
@@ -11,7 +12,7 @@ class Button:
         self.is_hovered = False
         
         try:
-            self.font = pygame.font.Font(os.path.join(FONTS_DIR, "pokemonsolid.ttf"), 32)  # Slightly smaller font
+            self.font = pygame.font.Font(os.path.join(FONTS_DIR, "pokemonsolid.ttf"), 32)  
         except:
             self.font = pygame.font.Font(None, 32)
         self.hover_sound = pygame.mixer.Sound(os.path.join(SOUNDS_DIR, "hover.mp3"))
@@ -49,12 +50,12 @@ class Button:
         return False
 
 class Menu:
-    def __init__(self, data_loader, game):
+    def __init__(self, game, pokemons_data):
         self.screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         pygame.display.set_caption("Pokemon Battle Game")
         self.clock = pygame.time.Clock()
-        self.data_loader = data_loader
-        self.game = game
+        self.game = game  # Store game instance
+        self.pokemons_data = pokemons_data  # Store pokemons data
         
         try:
             self.font = pygame.font.Font(os.path.join(FONTS_DIR, "pokemonsolid.ttf"), 32)
@@ -122,7 +123,7 @@ class Menu:
             shadow = prompt_font.render(prompt, True, BLACK)
             text = prompt_font.render(prompt, True, BRIGHT_YELLOW)
             
-            prompt_y = WINDOW_HEIGHT//2 - 80  # Moved up slightly to accommodate larger font
+            prompt_y = WINDOW_HEIGHT//2 - 80  
             self.screen.blit(shadow, (WINDOW_WIDTH//2 - shadow.get_width()//2 + 2, prompt_y + 2))
             self.screen.blit(text, (WINDOW_WIDTH//2 - text.get_width()//2, prompt_y))
             
@@ -355,20 +356,20 @@ class Menu:
                 
                 # Add FAINTED message 
                 if pokemon.is_fainted():
-                    fainted_text = info_font.render("FAINTED", True, (255, 0, 0))  # Bright red
+                    fainted_text = info_font.render("FAINTED", True, (255, 0, 0))  
                     self.screen.blit(fainted_text, (info_x + 300, y + 35))
             
             if scroll_offset > 0:
                 pygame.draw.polygon(self.screen, BLACK,
-                                 [(WINDOW_WIDTH - 30, start_y + 27),  # Added 7 more pixels (total +27)
-                                  (WINDOW_WIDTH - 20, start_y + 47),  # Added 7 more pixels (total +47)
-                                  (WINDOW_WIDTH - 40, start_y + 47)])  # Added 7 more pixels (total +47)
+                                 [(WINDOW_WIDTH - 30, start_y + 27),  
+                                  (WINDOW_WIDTH - 20, start_y + 47),  
+                                  (WINDOW_WIDTH - 40, start_y + 47)])  
             if scroll_offset < len(available_pokemon) - visible_pokemon:
                 end_y = start_y + (visible_pokemon * pokemon_height)
                 pygame.draw.polygon(self.screen, BLACK,
-                                 [(WINDOW_WIDTH - 30, end_y + 17),  # Added 7 more pixels (from +10 to +17)
-                                  (WINDOW_WIDTH - 20, end_y - 3),   # Added 7 pixels (from -10 to -3)
-                                  (WINDOW_WIDTH - 40, end_y - 3)])  # Added 7 pixels (from -10 to -3)
+                                 [(WINDOW_WIDTH - 30, end_y + 17),  
+                                  (WINDOW_WIDTH - 20, end_y - 3),   
+                                  (WINDOW_WIDTH - 40, end_y - 3)])  
             
             if is_battle_select:
                 esc_text = info_font.render("Press Esc to quit the game", True, BRIGHT_YELLOW)
@@ -404,7 +405,7 @@ class Menu:
                                 return ('new_game', player_name)
                         elif button_name == 'continue':
                             player_name = self.get_player_name()
-                            if player_name and self.data_loader.load_player_pokedex(player_name):
+                            if player_name and load_player_pokedex(player_name, self.pokemons_data):
                                 return ('continue', player_name)
             
             self.draw()

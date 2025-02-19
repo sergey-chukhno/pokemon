@@ -2,7 +2,7 @@
     {
         "id": 2,
         "name": "Ivysaur",
-        "current_hp": 28,
+        "current_hp": 0,
         "level": 1,
         "experience": 50,
         "state": null,
@@ -11,33 +11,6 @@
     {
         "id": 3,
         "name": "Venusaur",
-        "current_hp": 72,
-        "level": 1,
-        "experience": 0,
-        "state": null,
-        "state_duration": 0
-    },
-    {
-        "id": 6,
-        "name": "Charizard",
-        "current_hp": 78,
-        "level": 1,
-        "experience": 50,
-        "state": null,
-        "state_duration": 0
-    },
-    {
-        "id": 21,
-        "name": "Spearow",
-        "current_hp": 0,
-        "level": 1,
-        "experience": 50,
-        "state": "poison",
-        "state_duration": 0
-    },
-    {
-        "id": 25,
-        "name": "Pikachu",
         "current_hp": 0,
         "level": 1,
         "experience": 0,
@@ -48,6 +21,15 @@
         "id": 4,
         "name": "Charmander",
         "current_hp": 39,
+        "level": 1,
+        "experience": 0,
+        "state": null,
+        "state_duration": 0
+    },
+    {
+        "id": 15,
+        "name": "Beedrill",
+        "current_hp": 0,
         "level": 1,
         "experience": 0,
         "state": null,
