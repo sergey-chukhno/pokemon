@@ -1,25 +1,7 @@
 [
     {
-        "id": 1,
-        "name": "Bulbasaur",
-        "current_hp": 45,
-        "level": 1,
-        "experience": 50,
-        "state": null,
-        "state_duration": 0
-    },
-    {
-        "id": 3,
-        "name": "Venusaur",
-        "current_hp": 88,
-        "level": 2,
-        "experience": 0,
-        "state": null,
-        "state_duration": 0
-    },
-    {
-        "id": 5,
-        "name": "Charmeleon",
+        "id": 2,
+        "name": "Ivysaur",
         "current_hp": 0,
         "level": 1,
         "experience": 0,
@@ -27,8 +9,8 @@
         "state_duration": 0
     },
     {
-        "id": 14,
-        "name": "Kakuna",
+        "id": 4,
+        "name": "Charmander",
         "current_hp": 0,
         "level": 1,
         "experience": 0,
@@ -36,18 +18,9 @@
         "state_duration": 0
     },
     {
-        "id": 27,
-        "name": "Sandshrew",
-        "current_hp": 50,
-        "level": 1,
-        "experience": 0,
-        "state": null,
-        "state_duration": 0
-    },
-    {
-        "id": 29,
-        "name": "Nidoran-f",
-        "current_hp": 55,
+        "id": 6,
+        "name": "Charizard",
+        "current_hp": 78,
         "level": 1,
         "experience": 0,
         "state": null,
