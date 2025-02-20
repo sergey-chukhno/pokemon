@@ -1,8 +1,8 @@
 [
     {
-        "id": 2,
-        "name": "Ivysaur",
-        "current_hp": 0,
+        "id": 1,
+        "name": "Bulbasaur",
+        "current_hp": 45,
         "level": 1,
         "experience": 50,
         "state": null,
@@ -11,6 +11,15 @@
     {
         "id": 3,
         "name": "Venusaur",
+        "current_hp": 88,
+        "level": 2,
+        "experience": 0,
+        "state": null,
+        "state_duration": 0
+    },
+    {
+        "id": 5,
+        "name": "Charmeleon",
         "current_hp": 0,
         "level": 1,
         "experience": 0,
@@ -18,18 +27,27 @@
         "state_duration": 0
     },
     {
-        "id": 4,
-        "name": "Charmander",
-        "current_hp": 39,
+        "id": 14,
+        "name": "Kakuna",
+        "current_hp": 0,
         "level": 1,
         "experience": 0,
         "state": null,
         "state_duration": 0
     },
     {
-        "id": 15,
-        "name": "Beedrill",
-        "current_hp": 0,
+        "id": 27,
+        "name": "Sandshrew",
+        "current_hp": 50,
+        "level": 1,
+        "experience": 0,
+        "state": null,
+        "state_duration": 0
+    },
+    {
+        "id": 29,
+        "name": "Nidoran-f",
+        "current_hp": 55,
         "level": 1,
         "experience": 0,
         "state": null,
