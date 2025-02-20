@@ -18,8 +18,7 @@
             "cut",
             "bind"
         ],
-        "sprite_path": "/Users/anatoliychubais/Desktop/La Plateforme Projects/pokemon/data/sprites/1.png",
-        "evolution_level": 0
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/1.png"
     },
     {
         "id": 2,
@@ -40,8 +39,7 @@
             "bind",
             "vine-whip"
         ],
-        "sprite_path": "/Users/anatoliychubais/Desktop/La Plateforme Projects/pokemon/data/sprites/2.png",
-        "evolution_level": 0
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/2.png"
     },
     {
         "id": 3,
@@ -62,8 +60,7 @@
             "bind",
             "vine-whip"
         ],
-        "sprite_path": "/Users/anatoliychubais/Desktop/La Plateforme Projects/pokemon/data/sprites/3.png",
-        "evolution_level": 0
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/3.png"
     },
     {
         "id": 4,
@@ -83,8 +80,7 @@
             "thunder-punch",
             "scratch"
         ],
-        "sprite_path": "/Users/anatoliychubais/Desktop/La Plateforme Projects/pokemon/data/sprites/4.png",
-        "evolution_level": 0
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/4.png"
     },
     {
         "id": 5,
@@ -104,8 +100,7 @@
             "thunder-punch",
             "scratch"
         ],
-        "sprite_path": "/Users/anatoliychubais/Desktop/La Plateforme Projects/pokemon/data/sprites/5.png",
-        "evolution_level": 0
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/5.png"
     },
     {
         "id": 6,
@@ -126,8 +121,7 @@
             "thunder-punch",
             "scratch"
         ],
-        "sprite_path": "/Users/anatoliychubais/Desktop/La Plateforme Projects/pokemon/data/sprites/6.png",
-        "evolution_level": 0
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/6.png"
     },
     {
         "id": 7,
@@ -147,8 +141,7 @@
             "mega-kick",
             "headbutt"
         ],
-        "sprite_path": "/Users/anatoliychubais/Desktop/La Plateforme Projects/pokemon/data/sprites/7.png",
-        "evolution_level": 0
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/7.png"
     },
     {
         "id": 8,
@@ -168,8 +161,7 @@
             "mega-kick",
             "headbutt"
         ],
-        "sprite_path": "/Users/anatoliychubais/Desktop/La Plateforme Projects/pokemon/data/sprites/8.png",
-        "evolution_level": 0
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/8.png"
     },
     {
         "id": 9,
@@ -189,8 +181,7 @@
             "mega-kick",
             "headbutt"
         ],
-        "sprite_path": "/Users/anatoliychubais/Desktop/La Plateforme Projects/pokemon/data/sprites/9.png",
-        "evolution_level": 0
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/9.png"
     },
     {
         "id": 10,
@@ -210,8 +201,7 @@
             "snore",
             "bug-bite"
         ],
-        "sprite_path": "/Users/anatoliychubais/Desktop/La Plateforme Projects/pokemon/data/sprites/10.png",
-        "evolution_level": 0
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/10.png"
     },
     {
         "id": 11,
@@ -231,8 +221,7 @@
             "iron-defense",
             "bug-bite"
         ],
-        "sprite_path": "/Users/anatoliychubais/Desktop/La Plateforme Projects/pokemon/data/sprites/11.png",
-        "evolution_level": 0
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/11.png"
     },
     {
         "id": 12,
@@ -253,8 +242,7 @@
             "whirlwind",
             "headbutt"
         ],
-        "sprite_path": "/Users/anatoliychubais/Desktop/La Plateforme Projects/pokemon/data/sprites/12.png",
-        "evolution_level": 0
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/12.png"
     },
     {
         "id": 13,
@@ -275,8 +263,7 @@
             "bug-bite",
             "electroweb"
         ],
-        "sprite_path": "/Users/anatoliychubais/Desktop/La Plateforme Projects/pokemon/data/sprites/13.png",
-        "evolution_level": 0
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/13.png"
     },
     {
         "id": 14,
@@ -297,8 +284,7 @@
             "iron-defense",
             "bug-bite"
         ],
-        "sprite_path": "/Users/anatoliychubais/Desktop/La Plateforme Projects/pokemon/data/sprites/14.png",
-        "evolution_level": 0
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/14.png"
     },
     {
         "id": 15,
@@ -319,8 +305,7 @@
             "headbutt",
             "fury-attack"
         ],
-        "sprite_path": "/Users/anatoliychubais/Desktop/La Plateforme Projects/pokemon/data/sprites/15.png",
-        "evolution_level": 0
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/15.png"
     },
     {
         "id": 16,
@@ -341,8 +326,7 @@
             "wing-attack",
             "whirlwind"
         ],
-        "sprite_path": "/Users/anatoliychubais/Desktop/La Plateforme Projects/pokemon/data/sprites/16.png",
-        "evolution_level": 0
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/16.png"
     },
     {
         "id": 17,
@@ -363,8 +347,7 @@
             "wing-attack",
             "whirlwind"
         ],
-        "sprite_path": "/Users/anatoliychubais/Desktop/La Plateforme Projects/pokemon/data/sprites/17.png",
-        "evolution_level": 0
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/17.png"
     },
     {
         "id": 18,
@@ -385,8 +368,7 @@
             "wing-attack",
             "whirlwind"
         ],
-        "sprite_path": "/Users/anatoliychubais/Desktop/La Plateforme Projects/pokemon/data/sprites/18.png",
-        "evolution_level": 0
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/18.png"
     },
     {
         "id": 19,
@@ -406,8 +388,7 @@
             "tackle",
             "body-slam"
         ],
-        "sprite_path": "/Users/anatoliychubais/Desktop/La Plateforme Projects/pokemon/data/sprites/19.png",
-        "evolution_level": 0
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/19.png"
     },
     {
         "id": 20,
@@ -427,8 +408,7 @@
             "headbutt",
             "tackle"
         ],
-        "sprite_path": "/Users/anatoliychubais/Desktop/La Plateforme Projects/pokemon/data/sprites/20.png",
-        "evolution_level": 0
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/20.png"
     },
     {
         "id": 21,
@@ -449,8 +429,7 @@
             "whirlwind",
             "fly"
         ],
-        "sprite_path": "/Users/anatoliychubais/Desktop/La Plateforme Projects/pokemon/data/sprites/21.png",
-        "evolution_level": 0
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/21.png"
     },
     {
         "id": 22,
@@ -471,8 +450,7 @@
             "whirlwind",
             "fly"
         ],
-        "sprite_path": "/Users/anatoliychubais/Desktop/La Plateforme Projects/pokemon/data/sprites/22.png",
-        "evolution_level": 0
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/22.png"
     },
     {
         "id": 23,
@@ -492,8 +470,7 @@
             "headbutt",
             "body-slam"
         ],
-        "sprite_path": "/Users/anatoliychubais/Desktop/La Plateforme Projects/pokemon/data/sprites/23.png",
-        "evolution_level": 0
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/23.png"
     },
     {
         "id": 24,
@@ -513,8 +490,7 @@
             "headbutt",
             "body-slam"
         ],
-        "sprite_path": "/Users/anatoliychubais/Desktop/La Plateforme Projects/pokemon/data/sprites/24.png",
-        "evolution_level": 0
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/24.png"
     },
     {
         "id": 25,
@@ -534,8 +510,7 @@
             "thunder-punch",
             "slam"
         ],
-        "sprite_path": "/Users/anatoliychubais/Desktop/La Plateforme Projects/pokemon/data/sprites/25.png",
-        "evolution_level": 0
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/25.png"
     },
     {
         "id": 26,
@@ -555,8 +530,7 @@
             "thunder-punch",
             "slam"
         ],
-        "sprite_path": "/Users/anatoliychubais/Desktop/La Plateforme Projects/pokemon/data/sprites/26.png",
-        "evolution_level": 0
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/26.png"
     },
     {
         "id": 27,
@@ -576,8 +550,7 @@
             "cut",
             "sand-attack"
         ],
-        "sprite_path": "/Users/anatoliychubais/Desktop/La Plateforme Projects/pokemon/data/sprites/27.png",
-        "evolution_level": 0
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/27.png"
     },
     {
         "id": 28,
@@ -597,8 +570,7 @@
             "cut",
             "sand-attack"
         ],
-        "sprite_path": "/Users/anatoliychubais/Desktop/La Plateforme Projects/pokemon/data/sprites/28.png",
-        "evolution_level": 0
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/28.png"
     },
     {
         "id": 29,
@@ -618,8 +590,7 @@
             "double-kick",
             "headbutt"
         ],
-        "sprite_path": "/Users/anatoliychubais/Desktop/La Plateforme Projects/pokemon/data/sprites/29.png",
-        "evolution_level": 0
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/29.png"
     },
     {
         "id": 30,
@@ -639,7 +610,6 @@
             "double-kick",
             "headbutt"
         ],
-        "sprite_path": "/Users/anatoliychubais/Desktop/La Plateforme Projects/pokemon/data/sprites/30.png",
-        "evolution_level": 0
+        "sprite_path": "/Users/anatoliychubais/Desktop/PokeApi/data/sprites/30.png"
     }
 ]

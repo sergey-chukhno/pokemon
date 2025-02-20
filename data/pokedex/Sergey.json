@@ -2,24 +2,15 @@
     {
         "id": 2,
         "name": "Ivysaur",
-        "current_hp": 14,
+        "current_hp": 0,
         "level": 1,
-        "experience": 50,
-        "state": null,
+        "experience": 0,
+        "state": "poison",
         "state_duration": 0
     },
     {
-        "id": 6,
-        "name": "Charizard",
-        "current_hp": 1,
-        "level": 1,
-        "experience": 50,
-        "state": null,
-        "state_duration": 0
-    },
-    {
-        "id": 8,
-        "name": "Wartortle",
+        "id": 4,
+        "name": "Charmander",
         "current_hp": 0,
         "level": 1,
         "experience": 0,
@@ -27,27 +18,9 @@
         "state_duration": 0
     },
     {
-        "id": 22,
-        "name": "Fearow",
-        "current_hp": 46,
-        "level": 1,
-        "experience": 50,
-        "state": null,
-        "state_duration": 0
-    },
-    {
-        "id": 22,
-        "name": "Fearow",
-        "current_hp": 65,
-        "level": 1,
-        "experience": 0,
-        "state": null,
-        "state_duration": 0
-    },
-    {
-        "id": 5,
-        "name": "Charmeleon",
-        "current_hp": 58,
+        "id": 6,
+        "name": "Charizard",
+        "current_hp": 0,
         "level": 1,
         "experience": 0,
         "state": null,

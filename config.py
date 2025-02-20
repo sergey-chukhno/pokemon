@@ -39,3 +39,18 @@ POKEAPI_BASE_URL = "https://pokeapi.co/api/v2"
 # Game settings
 INITIAL_POKEMON_COUNT = 30
 MAX_PLAYER_POKEMON = 3 
+
+# Make sure all directories exist on startup
+REQUIRED_DIRS = [
+    os.path.join(DATA_DIR, 'sprites'),
+    os.path.join(DATA_DIR, 'pokedex'),
+    os.path.join(ASSETS_DIR, 'images', 'battle', 'states'),
+    os.path.join(ASSETS_DIR, 'images', 'battle', 'sounds'),
+    os.path.join(ASSETS_DIR, 'images', 'battle', 'animation'),
+    os.path.join(ASSETS_DIR, 'sounds', 'menu'),
+    os.path.join(ASSETS_DIR, 'sounds', 'battle'),
+    os.path.join(ASSETS_DIR, 'sounds', 'attacks'),
+]
+
+for directory in REQUIRED_DIRS:
+    os.makedirs(directory, exist_ok=True) 

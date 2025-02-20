@@ -11,7 +11,9 @@ class Pokemon:
         self.stats = pokemon_data['stats']
         self.moves = pokemon_data['moves']
         self.current_hp = pokemon_data.get('current_hp', self.stats['hp'])
-        self.sprite = pygame.image.load(pokemon_data['sprite_path'])
+        # Load sprite using relative path
+        sprite_path = os.path.join(DATA_DIR, pokemon_data['sprite_path'])
+        self.sprite = pygame.image.load(sprite_path)
         self.position = None
         self.state = None  # Can be: 'poison', 'burn', 'freeze', 'asleep' or None
         self.state_duration = 0  # For temporary states like sleep
@@ -60,3 +62,16 @@ class Pokemon:
         for stat in self.stats:
             self.stats[stat] = int(self.stats[stat] * 1.1)  # 10% increase
         self.current_hp = self.stats['hp']  # Heal on level up 
+
+    def load_state_icons(self):
+        self.state_icons = {}
+        for state in ['poison', 'burn', 'freeze', 'asleep']:
+            try:
+                icon = pygame.image.load(os.path.join(BATTLE_IMAGES_DIR, 'states', f'{state}.png'))
+                self.state_icons[state] = pygame.transform.scale(icon, (24, 24))
+            except:
+                print(f"Warning: Could not load {state} icon")
+                # Create a fallback colored rectangle
+                surface = pygame.Surface((24, 24))
+                surface.fill((255, 0, 0))  # Red fallback
+                self.state_icons[state] = surface 
