@@ -15,8 +15,16 @@ class Button:
             self.font = pygame.font.Font(os.path.join(FONTS_DIR, "pokemonsolid.ttf"), 32)  
         except:
             self.font = pygame.font.Font(None, 32)
-        self.hover_sound = pygame.mixer.Sound(os.path.join(SOUNDS_DIR, "hover.mp3"))
-        self.select_sound = pygame.mixer.Sound(os.path.join(SOUNDS_DIR, "click.mp3"))
+
+        # Load sounds with error handling
+        try:
+            self.hover_sound = pygame.mixer.Sound(os.path.join(SOUNDS_DIR, "hover.mp3"))
+            self.select_sound = pygame.mixer.Sound(os.path.join(SOUNDS_DIR, "click.mp3"))
+        except:
+            print("Warning: Could not load button sound effects")
+            self.hover_sound = None
+            self.select_sound = None
+            
         self.hover_sound_played = False
         
     def draw(self, screen):
@@ -41,11 +49,12 @@ class Button:
         if event.type == pygame.MOUSEMOTION:
             was_hovered = self.is_hovered
             self.is_hovered = self.rect.collidepoint(event.pos)
-            if self.is_hovered and not was_hovered:
+            if self.is_hovered and not was_hovered and self.hover_sound:
                 self.hover_sound.play()
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if self.is_hovered:
-                self.select_sound.play()
+                if self.select_sound:
+                    self.select_sound.play()
                 return True
         return False
 
@@ -54,16 +63,26 @@ class Menu:
         self.screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         pygame.display.set_caption("Pokemon Battle Game")
         self.clock = pygame.time.Clock()
-        self.game = game  # Store game instance
-        self.pokemons_data = pokemons_data  # Store pokemons data
+        self.game = game
+        self.pokemons_data = pokemons_data
         
+        # Load font with fallback
         try:
             self.font = pygame.font.Font(os.path.join(FONTS_DIR, "pokemonsolid.ttf"), 32)
         except:
+            print("Warning: Could not load Pokemon font, using default")
             self.font = pygame.font.Font(None, 32)
+            
         self.setup_buttons()
-        self.background = pygame.image.load(os.path.join(MENU_IMAGES_DIR, "menu1.png"))
-        self.background = pygame.transform.scale(self.background, (WINDOW_WIDTH, WINDOW_HEIGHT))
+        
+        # Load background with fallback
+        try:
+            self.background = pygame.image.load(os.path.join(MENU_IMAGES_DIR, "menu1.png"))
+            self.background = pygame.transform.scale(self.background, (WINDOW_WIDTH, WINDOW_HEIGHT))
+        except:
+            print("Warning: Could not load menu background, using solid color")
+            self.background = pygame.Surface((WINDOW_WIDTH, WINDOW_HEIGHT))
+            self.background.fill((50, 50, 50))  # Dark gray background as fallback
         
     def setup_buttons(self):
         button_width = 220  

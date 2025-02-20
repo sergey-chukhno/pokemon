@@ -2,16 +2,16 @@
     {
         "id": 2,
         "name": "Ivysaur",
-        "current_hp": 0,
+        "current_hp": 60,
         "level": 1,
-        "experience": 0,
-        "state": "poison",
+        "experience": 50,
+        "state": null,
         "state_duration": 0
     },
     {
         "id": 4,
         "name": "Charmander",
-        "current_hp": 0,
+        "current_hp": 39,
         "level": 1,
         "experience": 0,
         "state": null,
@@ -21,6 +21,24 @@
         "id": 6,
         "name": "Charizard",
         "current_hp": 0,
+        "level": 1,
+        "experience": 50,
+        "state": null,
+        "state_duration": 0
+    },
+    {
+        "id": 7,
+        "name": "Squirtle",
+        "current_hp": 44,
+        "level": 1,
+        "experience": 0,
+        "state": null,
+        "state_duration": 0
+    },
+    {
+        "id": 15,
+        "name": "Beedrill",
+        "current_hp": 65,
         "level": 1,
         "experience": 0,
         "state": null,

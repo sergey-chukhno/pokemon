@@ -26,13 +26,13 @@ def download_pokemon_sprite(pokemon_id):
         sprite_url = pokemon_data['sprites']['front_default']
         response = requests.get(sprite_url)
         if response.status_code == 200:
-            # Store only the relative path
-            sprite_path = f'sprites/{pokemon_id}.png'
-            full_path = os.path.join(DATA_DIR, sprite_path)
+            # Store only the relative path from data directory
+            sprite_path = os.path.join('sprites', f'{pokemon_id}.png')  # Use os.path.join for cross-platform
+            full_path = os.path.join(DATA_DIR, 'sprites', f'{pokemon_id}.png')
             os.makedirs(os.path.dirname(full_path), exist_ok=True)
             with open(full_path, 'wb') as f:
                 f.write(response.content)
-            return sprite_path  # Return relative path
+            return sprite_path  # Return relative path only
     return None
 
 def initialize_pokemon_database(count=30):

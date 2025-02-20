@@ -11,23 +11,32 @@ class Pokemon:
         self.stats = pokemon_data['stats']
         self.moves = pokemon_data['moves']
         self.current_hp = pokemon_data.get('current_hp', self.stats['hp'])
+        
         # Load sprite using relative path
-        sprite_path = os.path.join(DATA_DIR, pokemon_data['sprite_path'])
-        self.sprite = pygame.image.load(sprite_path)
+        sprite_path = os.path.join(DATA_DIR, pokemon_data['sprite_path'].replace('\\', '/'))
+        try:
+            self.sprite = pygame.image.load(sprite_path)
+        except FileNotFoundError:
+            print(f"Could not load sprite at {sprite_path}")
+            # Create a fallback sprite
+            self.sprite = pygame.Surface((64, 64))
+            self.sprite.fill((255, 0, 255))  # Fill with magenta to make missing sprites obvious
         self.position = None
         self.state = None  # Can be: 'poison', 'burn', 'freeze', 'asleep' or None
         self.state_duration = 0  # For temporary states like sleep
         
-    
-        self.state_icons = {
-            'poison': pygame.image.load(os.path.join(BATTLE_IMAGES_DIR, 'states', 'poison.png')),
-            'burn': pygame.image.load(os.path.join(BATTLE_IMAGES_DIR, 'states', 'burn.png')),
-            'freeze': pygame.image.load(os.path.join(BATTLE_IMAGES_DIR, 'states', 'freeze.png')),
-            'asleep': pygame.image.load(os.path.join(BATTLE_IMAGES_DIR, 'states', 'asleep.png'))
-        }
-        
-        for state in self.state_icons:
-            self.state_icons[state] = pygame.transform.scale(self.state_icons[state], (24, 24))
+        # Load state icons using relative paths
+        self.state_icons = {}
+        for state in ['poison', 'burn', 'freeze', 'asleep']:
+            try:
+                icon_path = os.path.join(BATTLE_IMAGES_DIR, 'states', f'{state}.png')
+                icon = pygame.image.load(icon_path)
+                self.state_icons[state] = pygame.transform.scale(icon, (24, 24))
+            except:
+                print(f"Warning: Could not load {state} icon")
+                surface = pygame.Surface((24, 24))
+                surface.fill((255, 0, 0))
+                self.state_icons[state] = surface
         
         self.level = pokemon_data.get('level', 1)
         self.experience = pokemon_data.get('experience', 0)

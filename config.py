@@ -16,22 +16,37 @@ YELLOW = (255, 255, 0)
 BRIGHT_YELLOW = (255, 255, 0)
 BUTTON_BLACK = (0, 0, 0, 180)  
 
-# Paths
-GAME_DIR = os.path.dirname(os.path.abspath(__file__))
-ASSETS_DIR = os.path.join(GAME_DIR, "assets")
+# Get the project root directory (where main.py is)
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+
+ASSETS_DIR = os.path.join(PROJECT_ROOT, "assets")
 IMAGES_DIR = os.path.join(ASSETS_DIR, "images")
 MENU_IMAGES_DIR = os.path.join(IMAGES_DIR, "menu")
 SOUNDS_DIR = os.path.join(ASSETS_DIR, "sounds")
 FONTS_DIR = os.path.join(ASSETS_DIR, "fonts")
-DATA_DIR = os.path.join(GAME_DIR, "data")
+DATA_DIR = os.path.join(PROJECT_ROOT, "data")
 POKEDEX_DIR = os.path.join(DATA_DIR, "pokedex")
 
-# Add battle backgrounds path
+# Battle paths
 BATTLE_IMAGES_DIR = os.path.join(IMAGES_DIR, "battle")
 BATTLE_ATTACKS_DIR = os.path.join(BATTLE_IMAGES_DIR, "animation")
 
-# Create directories if they don't exist
-os.makedirs(POKEDEX_DIR, exist_ok=True)
+# Required directory structure
+REQUIRED_DIRS = [
+    os.path.join(DATA_DIR, 'sprites'),
+    os.path.join(DATA_DIR, 'pokedex'),
+    os.path.join(IMAGES_DIR, 'battle', 'states'),
+    os.path.join(IMAGES_DIR, 'battle', 'sounds'),
+    os.path.join(IMAGES_DIR, 'battle', 'animation'),
+    os.path.join(SOUNDS_DIR, 'menu'),
+    os.path.join(SOUNDS_DIR, 'battle'),
+    os.path.join(SOUNDS_DIR, 'attacks'),
+]
+
+# Create all required directories
+for directory in REQUIRED_DIRS:
+    os.makedirs(directory, exist_ok=True)
 
 # API
 POKEAPI_BASE_URL = "https://pokeapi.co/api/v2"
@@ -39,18 +54,3 @@ POKEAPI_BASE_URL = "https://pokeapi.co/api/v2"
 # Game settings
 INITIAL_POKEMON_COUNT = 30
 MAX_PLAYER_POKEMON = 3 
-
-# Make sure all directories exist on startup
-REQUIRED_DIRS = [
-    os.path.join(DATA_DIR, 'sprites'),
-    os.path.join(DATA_DIR, 'pokedex'),
-    os.path.join(ASSETS_DIR, 'images', 'battle', 'states'),
-    os.path.join(ASSETS_DIR, 'images', 'battle', 'sounds'),
-    os.path.join(ASSETS_DIR, 'images', 'battle', 'animation'),
-    os.path.join(ASSETS_DIR, 'sounds', 'menu'),
-    os.path.join(ASSETS_DIR, 'sounds', 'battle'),
-    os.path.join(ASSETS_DIR, 'sounds', 'attacks'),
-]
-
-for directory in REQUIRED_DIRS:
-    os.makedirs(directory, exist_ok=True) 
