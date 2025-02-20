@@ -1,0 +1,32 @@
+{
+    "player_pokemon": {
+        "name": "Charmander",
+        "level": 1,
+        "current_hp": 11,
+        "max_hp": 11,
+        "types": [
+            "fire"
+        ],
+        "attacks": [
+            "mega-punch",
+            "fire-punch",
+            "thunder-punch",
+            "scratch"
+        ]
+    },
+    "opponent_pokemon": {
+        "name": "Clefairy",
+        "level": 2,
+        "current_hp": 14,
+        "max_hp": 14,
+        "types": [
+            "fairy"
+        ],
+        "attacks": [
+            "pound",
+            "double-slap",
+            "mega-punch",
+            "fire-punch"
+        ]
+    }
+}

@@ -1,0 +1,63 @@
+[
+    {
+        "name": "Charmander",
+        "level": 5,
+        "current_hp": 23,
+        "max_hp": 23,
+        "types": [
+            "fire"
+        ],
+        "attacks": [
+            "mega-punch",
+            "fire-punch",
+            "thunder-punch",
+            "scratch"
+        ]
+    },
+    {
+        "name": "Pikachu",
+        "level": 2,
+        "current_hp": 15,
+        "max_hp": 15,
+        "types": [
+            "electric"
+        ],
+        "attacks": [
+            "mega-punch",
+            "pay-day",
+            "thunder-punch",
+            "slam"
+        ]
+    },
+    {
+        "name": "Caterpie",
+        "level": 3,
+        "current_hp": 18,
+        "max_hp": 18,
+        "types": [
+            "bug"
+        ],
+        "attacks": [
+            "tackle",
+            "string-shot",
+            "snore",
+            "bug-bite"
+        ]
+    },
+    {
+        "name": "Zubat",
+        "level": 3,
+        "current_hp": 18,
+        "max_hp": 18,
+        "types": [
+            "poison",
+            "flying"
+        ],
+        "attacks": [
+            "razor-wind",
+            "gust",
+            "wing-attack",
+            "whirlwind"
+        ]
+    }
+]
