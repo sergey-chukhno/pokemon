@@ -16,6 +16,8 @@ class Game:
         pygame.mixer.init()  # Initialize the mixer
         self.screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         self.pokemons_data = load_pokemons()  # Load Pokemon data once
+        if not self.pokemons_data:
+            self.initialize_game_data()
         self.menu = Menu(self, self.pokemons_data)  # Pass self (game instance) and pokemons_data
         self.clock = pygame.time.Clock()
         self.player_name = None
@@ -32,6 +34,8 @@ class Game:
         if not self.pokemons_data:
             initialize_pokemon_database(INITIAL_POKEMON_COUNT)
             self.pokemons_data = load_pokemons()
+            if hasattr(self, 'menu') and self.menu:
+                self.menu.pokemons_data = self.pokemons_data
             
     def check_evolution(self, pokemon):
         if pokemon.level >= pokemon.evolution_level and pokemon.evolution_level > 0:
