@@ -15,11 +15,14 @@ A 2D turn-based Pokémon battle game built in Python using **Pygame** and integr
 
 ### 📸 Screenshots
 
-| Main Menu | Starter Selection |
-| :---: | :---: |
-| ![Main Menu](assets/screenshots/menu.png) | ![Starter Selection](assets/screenshots/selection.png) |
-| **Battle Arena** | **Bag & Inventory** |
-| ![Battle Arena](assets/screenshots/battle.png) | ![Bag & Inventory](assets/screenshots/bag.png) |
+<p align="center">
+  <img src="assets/screenshots/menu.png" width="380" alt="Main Menu" />
+  <img src="assets/screenshots/selection.png" width="380" alt="Starter Selection" />
+</p>
+<p align="center">
+  <img src="assets/screenshots/battle.png" width="380" alt="Battle Arena" />
+  <img src="assets/screenshots/bag.png" width="380" alt="Bag & Inventory" />
+</p>
 
 ---
 
@@ -99,6 +102,17 @@ python3 main.py
 ## 🇫🇷 Français
 
 Un jeu de combat Pokémon 2D au tour par tour développé en Python avec **Pygame** et connecté à **PokeAPI** pour les données et sprites des Pokémon. Comprend des animations de combat, des effets sonores immersifs, un inventaire d'objets, l'évolution des Pokémon et la sauvegarde automatique de la progression.
+
+### 📸 Captures d'écran
+
+<p align="center">
+  <img src="assets/screenshots/menu.png" width="380" alt="Menu Principal" />
+  <img src="assets/screenshots/selection.png" width="380" alt="Sélection de l'équipe" />
+</p>
+<p align="center">
+  <img src="assets/screenshots/battle.png" width="380" alt="Arène de Combat" />
+  <img src="assets/screenshots/bag.png" width="380" alt="Sac & Inventaire" />
+</p>
 
 ### ✨ Fonctionnalités Principales
 
@@ -200,3 +214,4 @@ pokemon/
 ├── requirements.txt        # Python package dependencies
 └── README.md               # Project documentation (EN/FR)
 ```
+
