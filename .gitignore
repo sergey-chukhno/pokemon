@@ -16,3 +16,4 @@ Thumbs.db
 # Player save files generated at runtime
 data/pokedex/*.json
 !data/pokedex/Sergey.json
+
