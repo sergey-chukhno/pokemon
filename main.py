@@ -31,6 +31,5 @@ def clean_pokemon_data():
 
 if __name__ == "__main__":
     check_directory_structure()
-    clean_pokemon_data()
     game = Game()
     game.run() 
