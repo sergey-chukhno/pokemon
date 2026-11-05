@@ -424,7 +424,8 @@ class Menu:
                                 return ('new_game', player_name)
                         elif button_name == 'continue':
                             player_name = self.get_player_name()
-                            if player_name and load_player_pokedex(player_name, self.pokemons_data):
+                            data = self.pokemons_data if self.pokemons_data else getattr(self.game, 'pokemons_data', [])
+                            if player_name and load_player_pokedex(player_name, data):
                                 return ('continue', player_name)
             
             self.draw()
